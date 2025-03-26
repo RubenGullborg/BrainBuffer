@@ -16,116 +16,15 @@ import Text from "../components/Text.astro";
 
 <MainLayout title="L1 Cache">
   <Quote
-    content="The only way to do great work is to love what you do."
-    author="Steve Jobs"
-    source="Stanford Commencement Speech"
-    date="2005-06-12"
-    tags={["mentality"]}
+    content="For freedom is acquired not by the full possession of the things which are desired, but by removing the desire..."
+    author="Epictetus"
+    source="Discourses 4.1"
+    date="Around 108 AD"
+    tags={["Stoicism"]}
   />
 
-
-  <Text title="L1 Cache">
-    <p class="text-3xl">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-    </p>
-    </Text>
-
-  <Fragment
-    type="observation"
-    content="Sometimes the most complex ideas can be expressed in the simplest terms."
-    timestamp="2024.03.21_15:42:33"></Fragment>
-
-  <Concept
-    term="Affordance"
-    definition="A quality of an object, or environment, that allows an individual to perform an action. The term is used in human-computer interaction to describe what a user interface allows a user to do."
-  />
-
-  <ThoughtStream
-    title="READING_REFLECTIONS"
-    context="Notes while reading 'Thinking Fast and Slow' by Daniel Kahneman"
-    thoughts={[
-      "What if consciousness is just a very sophisticated cache system?",
-      "Every thought leaves a trace in our neural pathways",
-      "Memory is not storage, it's reconstruction",
-    ]}
-  />
-
-  <CodeSnippet
-    title="Binary Search Algorithm"
-    language="python"
-    code={`def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-    
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-            
-    return -1`}
-    notes={[
-      "Time Complexity: O(log n)",
-      "Space Complexity: O(1)",
-      "Requires sorted input array",
-    ]}
-  />
-
-  <Timeline
-    title="LEARNING_PROGRESSION"
-    events={[
-      {
-        timestamp: "2023.01.15",
-        title: "First Encounter with Neural Networks",
-        description:
-          "Initial exposure to the concept through a university lecture on artificial intelligence fundamentals.",
-      },
-      {
-        timestamp: "2023.03.22",
-        title: "Built First Model",
-        description:
-          "Successfully implemented a basic classification model using TensorFlow for image recognition tasks.",
-      },
-      {
-        timestamp: "2023.07.05",
-        title: "Advanced Architectures",
-        description:
-          "Explored transformer architectures and their applications in natural language processing.",
-      },
-    ]}
-  />
-
-  <Comparison
-    titleA="Supervised Learning"
-    titleB="Unsupervised Learning"
-    items={[
-      {
-        aspect: "Training Data",
-        itemA: "Labeled data with inputs and expected outputs",
-        itemB: "Unlabeled data with only inputs",
-      },
-      {
-        aspect: "Objective",
-        itemA: "Predict correct output for given input",
-        itemB: "Find hidden patterns or structures in data",
-      },
-      {
-        aspect: "Applications",
-        itemA: "Classification, regression, forecasting",
-        itemB: "Clustering, dimensionality reduction, anomaly detection",
-      },
-      {
-        aspect: "Evaluation",
-        itemA: "Direct comparison with ground truth",
-        itemB: "Indirect metrics like cohesion and separation",
-      },
-    ]}
-    conclusion="Both approaches have distinct applications depending on data availability and problem structure. Supervised learning excels at specific prediction tasks when labeled data is available, while unsupervised learning enables pattern discovery in unlabeled datasets."
-  />
-
-  <KeyValue
+  {
+    /* <KeyValue
     title="WEALTH_DISTRIBUTION"
     items={[
       {
@@ -150,32 +49,6 @@ import Text from "../components/Text.astro";
     source="Economic Policy Institute analysis of Social Security Administration data"
     sourceUrl="https://www.bankrate.com/investing/income-wealth-top-1-percent/"
   />
-
-  <InfoCard
-    title="SYSTEM_UPDATE"
-    body="A new update is available for your system. Please restart your application to continue."
-    type="success"
-  />
-
-  <BlockQuote
-    quote="The only way to do great work is to love what you do."
-    author="Steve Jobs"
-    year="2005-06-12"
-    work="Stanford Commencement Speech"
-    importance="secondary"
-  />
-
-  <Terminal
-    commands={[
-      {
-        input: "ls",
-        output: ["file1.txt", "file2.txt", "file3.txt"],
-        explanation: "This is an explanation",
-      },
-    ]},
-    title="Terminal"
-    prompt="user@brainbuffer:~$ "
-  />
-
-      
+*/
+  }
 </MainLayout>
