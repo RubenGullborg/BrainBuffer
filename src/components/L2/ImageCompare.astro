@@ -1,0 +1,63 @@
+---
+interface Props {
+  imageBefore: {
+    src: string;
+    alt: string;
+    caption?: string;
+  };
+  imageAfter: {
+    src: string;
+    alt: string;
+    caption?: string;
+  };
+  title?: string;
+}
+
+const { imageBefore, imageAfter, title } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-5xl px-8">
+  <div class="space-y-4">
+    <div class="font-mono text-xs text-black/40">
+      <span>VISUAL_COMPARISON: {title || "BEFORE_AFTER"}</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8">
+      <div class="space-y-2">
+        <div class="border border-black/10 overflow-hidden">
+          <img
+            src={imageBefore.src}
+            alt={imageBefore.alt}
+            class="w-full object-cover"
+          />
+        </div>
+        {
+          imageBefore.caption && (
+            <p class="text-sm text-black/60">{imageBefore.caption}</p>
+          )
+        }
+        <div class="text-xs font-mono text-black/40 text-center mt-1">
+          INITIAL_STATE
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <div class="border border-black/10 overflow-hidden">
+          <img
+            src={imageAfter.src}
+            alt={imageAfter.alt}
+            class="w-full object-cover"
+          />
+        </div>
+        {
+          imageAfter.caption && (
+            <p class="text-sm text-black/60">{imageAfter.caption}</p>
+          )
+        }
+        <div class="text-xs font-mono text-black/40 text-center mt-1">
+          FINAL_STATE
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

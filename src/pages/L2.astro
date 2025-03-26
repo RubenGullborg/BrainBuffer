@@ -1,7 +1,73 @@
 ---
+import akira from "../assets/akira.jpg";
 import MainLayout from "../layouts/main-layout.astro";
+import ImageFull from "../components/L2/ImageFull.astro";
+import ImageGrid from "../components/L2/ImageGrid.astro";
+import ImageCompare from "../components/L2/ImageCompare.astro";
+import ImageMoodBoard from "../components/L2/ImageMoodBoard.astro";
+import ImageSpotlight from "../components/L2/ImageSpotlight.astro";
 ---
 
-<MainLayout title="L2 Cache" >
+<MainLayout title="L2 Cache">
+  <ImageFull
+    src={akira.src}
+    alt="Akira"
+    caption="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageGrid
+    images={[
+      {
+        src: akira.src,
+        alt: "Akira",
+        caption:
+          "Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo",
+      },
+      {
+        src: akira.src,
+        alt: "Akira",
+        caption:
+          "Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo",
+      },
+    ]}
+    title="Akira"
+  />
+
+  <ImageCompare
+    imageBefore={{
+      src: akira.src,
+      alt: "Akira",
+      caption: "Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo",
+    }}
+    imageAfter={{
+      src: akira.src,
+      alt: "Akira",
+      caption: "Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo",
+    }}
+    title="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageMoodBoard
+    images={[
+      { src: akira.src, alt: "Akira", width: 1, height: 1 },
+      { src: akira.src, alt: "Akira", width: 2, height: 1 },
+      { src: akira.src, alt: "Akira", width: 1, height: 2 },
+      { src: akira.src, alt: "Akira", width: 2, height: 1 },
+      { src: akira.src, alt: "Akira", width: 1, height: 1 },
+      { src: akira.src, alt: "Akira", width: 2, height: 2 },
+      { src: akira.src, alt: "Akira", width: 1, height: 1 },
+      { src: akira.src, alt: "Akira", width: 1, height: 1 },
+      { src: akira.src, alt: "Akira", width: 2, height: 1 },
+    ]}
+    title="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageSpotlight
+    src={akira.src}
+    alt="Akira"
+    caption="Akira (1988)"
+    description="A futuristic vision of a post-apocalyptic Tokyo"
+    timestamp="2024-01-01_13:43:21"
+  />
 
 </MainLayout>

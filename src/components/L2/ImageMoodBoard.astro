@@ -1,0 +1,44 @@
+---
+interface ImageItem {
+  src: string;
+  alt: string;
+  width?: 1 | 2; // 1 = standard, 2 = double width
+  height?: 1 | 2; // 1 = standard, 2 = double height
+}
+
+interface Props {
+  images: ImageItem[];
+  title?: string;
+}
+
+const { images, title } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-6xl px-8">
+  <div class="space-y-4">
+    <div class="font-mono text-xs text-black/40 flex justify-between">
+      <span>VISUAL_PATTERN: {title || "INSPIRATION_CLUSTER"}</span>
+      <span>ELEMENTS: {images.length}</span>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 auto-rows-[200px]">
+      {
+        images.map((image) => {
+          const colSpan = image.width === 2 ? "col-span-2" : "col-span-1";
+          const rowSpan = image.height === 2 ? "row-span-2" : "row-span-1";
+          return (
+            <div
+              class={`${colSpan} ${rowSpan} border border-black/10 overflow-hidden`}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>

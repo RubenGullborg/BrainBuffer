@@ -1,0 +1,47 @@
+---
+interface ImageItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: ImageItem[];
+  columns?: 2 | 3 | 4;
+  title?: string;
+}
+
+const { images, columns = 3, title } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-6xl px-8">
+  <div class="space-y-6">
+    <div
+      class="font-mono text-xs text-black/40 flex justify-between items-center"
+    >
+      <span>VISUAL_COLLECTION: {title || "PATTERN_CLUSTER"}</span>
+      <span>COUNT: {images.length}</span>
+    </div>
+
+    <div
+      class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}
+    >
+      {
+        images.map((image) => (
+          <div class="space-y-2 overflow-hidden">
+            <div class="border border-black/10 overflow-hidden aspect-square">
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            {image.caption && (
+              <p class="text-xs text-black/60">{image.caption}</p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  attribution?: string;
+  memoryId?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  attribution,
+  memoryId = Math.floor(Math.random() * 10000),
+} = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-5xl px-8">
+  <div class="space-y-3">
+    <div
+      class="font-mono text-xs text-black/40 flex justify-between items-center"
+    >
+      <span>VISUAL_MEMORY_ID: {memoryId}</span>
+      <span>TYPE: FULL_RESOLUTION</span>
+    </div>
+
+    <div class="border border-black/10 overflow-hidden">
+      <img
+        src={src}
+        alt={alt}
+        class="w-full object-cover transition-transform hover:scale-[1.02] duration-700"
+      />
+    </div>
+
+    <div class="flex justify-between items-baseline pt-2">
+      {caption && <p class="text-sm text-black/70">{caption}</p>}
+      {
+        attribution && (
+          <p class="text-xs text-black/40 font-mono">SOURCE: {attribution}</p>
+        )
+      }
+    </div>
+  </div>
+</div>
