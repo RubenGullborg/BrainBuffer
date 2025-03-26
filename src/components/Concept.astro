@@ -1,0 +1,35 @@
+---
+interface Props {
+  term: string;
+  definition: string;
+}
+
+const { term, definition } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="space-y-6">
+    <div class="font-mono text-xs text-black/40">
+      CONCEPT_ADDR: 0x{
+        Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, "0")
+          .toUpperCase()
+      }
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-3xl font-mono font-light tracking-tight">{term}</h2>
+      <div
+        class="w-full h-[1px] bg-gradient-to-r from-black/5 via-black/20 to-black/5"
+      >
+      </div>
+      <p class="text-md font-light font-mono text-black/50 leading-relaxed">{definition}</p>
+    </div>
+
+    <div class="font-mono text-xs text-black/40 flex items-center gap-2">
+      <span class="inline-block w-2 h-2 bg-black/30"></span>
+      <span>End-of-definition</span>
+    </div>
+  </div>
+</div>

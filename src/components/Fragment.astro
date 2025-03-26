@@ -1,0 +1,35 @@
+---
+interface Props {
+  content: string;
+  type: "observation" | "question" | "hypothesis" | "note";
+  source?: string;
+  timestamp?: string;
+}
+
+const { content, type, source, timestamp } = Astro.props;
+
+// Subtle type indicators
+const typeIcons = {
+  observation: "👁️",
+  question: "❓",
+  hypothesis: "🧠",
+  note: "📝"
+};
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="border border-black/10 px-6 py-8">
+    <div class="font-mono text-xs text-black/40 flex items-center gap-2 mb-6">
+      <span class=" w-6 h-6 flex items-center justify-center rounded-full">{typeIcons[type]}</span>
+      <span>MEMORY_FRAGMENT_TYPE: {type.toUpperCase()}</span>
+    </div>
+    
+    <p class="text-xl font-light leading-relaxed">{content}</p>
+    
+    <div class="mt-6 space-y-1 font-mono text-xs text-black/40">
+      {source && <div>source: {source}</div>}
+      {timestamp && <div>timestamp: {timestamp}</div>}
+      <div class="text-right">// END OF FRAGMENT</div>
+    </div>
+  </div>
+</div>

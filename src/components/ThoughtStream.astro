@@ -1,0 +1,70 @@
+---
+interface Props {
+  thoughts: string[];
+  title?: string;
+  context?: string;
+}
+
+const { thoughts, title = "THOUGHT_STREAM", context } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="border-l-2 border-black/20 pl-6">
+    <div class="font-mono text-xs text-black/40 mb-6 glitch-text">MEMORY_DUMP: {title}</div>
+    
+    {context && (
+      <div class="mb-8 text-sm italic text-black/60">{context}</div>
+    )}
+    
+    <div class="space-y-6">
+      {thoughts.map((thought, index) => (
+        <div class="flex items-start">
+          <div class="font-mono text-xs mr-3 mt-1 text-black/30">{index + 1}</div>
+          <p class="text-lg font-light glitch-content">{thought}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .glitch-text {
+    position: relative;
+    animation: glitch 3s infinite;
+  }
+  
+  .glitch-content {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .glitch-content:hover {
+    animation: content-glitch 0.8s linear;
+  }
+  
+  @keyframes glitch {
+    0% { transform: translate(0) }
+    1% { transform: translate(-2px, 1px) }
+    2% { transform: translate(0) }
+    95% { transform: translate(0) }
+    96% { transform: translate(1px, -1px) }
+    97% { transform: translate(-1px, 1px) }
+    98% { transform: translate(1px, -1px) }
+    99% { transform: translate(0) }
+    100% { transform: translate(0) }
+  }
+  
+  @keyframes content-glitch {
+    0% { transform: translate(0) }
+    10% { transform: translate(-2px, 1px) }
+    20% { transform: translate(2px, -1px) }
+    30% { transform: translate(-1px, -1px) }
+    40% { transform: translate(1px, 1px) }
+    50% { transform: translate(-1px, -2px) }
+    60% { transform: translate(1px, 1px) }
+    70% { transform: translate(2px, -1px) }
+    80% { transform: translate(-1px, 0px) }
+    90% { transform: translate(1px, -1px) }
+    100% { transform: translate(0) }
+  }
+</style> 

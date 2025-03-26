@@ -1,6 +1,9 @@
 ---
 import MainLayout from "../layouts/main-layout.astro";
 import Quote from "../components/Quote.astro";
+import Fragment from "../components/Fragment.astro";
+import Concept from "../components/Concept.astro";
+import ThoughtStream from "../components/ThoughtStream.astro";
 ---
 
 <MainLayout title="L1 Cache">
@@ -9,13 +12,33 @@ import Quote from "../components/Quote.astro";
     author="Steve Jobs"
     source="Stanford Commencement Speech"
     date="2005-06-12"
-    tags={["inspiration", "work", "passion"]}
+    tags={["mentality"]}
   />
 
   <Quote
     content="In computing, cache is a hardware or software component that stores data so that future requests for that data can be served faster."
     author="Wikipedia"
-    source="Cache (computing)"
-    tags={["computing", "memory", "performance"]}
+    source="https://en.wikipedia.org/wiki/Cache_(computing)"
+    tags={["computing", "memory"]}
+  />
+
+  <Fragment
+    type="observation"
+    content="Sometimes the most complex ideas can be expressed in the simplest terms."
+    timestamp="2024.03.21_15:42:33"></Fragment>
+
+  <Concept
+    term="Affordance"
+    definition="A quality of an object, or environment, that allows an individual to perform an action. The term is used in human-computer interaction to describe what a user interface allows a user to do."
+  />
+
+  <ThoughtStream
+    title="READING_REFLECTIONS"
+    context="Notes while reading 'Thinking Fast and Slow' by Daniel Kahneman"
+    thoughts={[
+      "What if consciousness is just a very sophisticated cache system?",
+      "Every thought leaves a trace in our neural pathways",
+      "Memory is not storage, it's reconstruction",
+    ]}
   />
 </MainLayout>
