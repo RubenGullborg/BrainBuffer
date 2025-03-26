@@ -99,7 +99,7 @@ export default function Nav() {
                   animate={{ 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.3 + i * 0.1 }
+                    transition: { delay: 0.3 + i * 0.25 }
                   }}
                   exit={{ opacity: 0, y: 20 }}
                   className="hover:text-gray-600 transition-colors relative group"

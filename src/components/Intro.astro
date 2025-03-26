@@ -1,58 +1,52 @@
 ---
 import { Image } from "astro:assets";
-import NVision from "../assets/Hyundai-Nvision.png"
-import Akira from "../assets/akira.jpg"
+import Akira from "../assets/akira.jpg";
 ---
 
 <div class="relative mx-12 flex flex-col items-center justify-center">
-<h1 class="text-5xl">Enter an infinitely inspirational black-hole of content <span class="font-bold"> Are you ready?</span></h1>
+  <h1 class="text-5xl text-left">
+    Welcome to all the <span class="font-bold">cached inspiration</span> of my mind
+  </h1>
 
-<div class="relative">
+  <div class="relative my-16">
+    <p class="p-4 text-lg text-left max-w-4xl">
+      Welcome to <span class="font-bold text-primary">L1 Cache</span>. This is meant as an
+      ever-expanding collection of artifacts that spark creativity and
+      imagination in my mind. I've formed this blog like a well-tuned cache memory, to stores and serve bits of
+      inspiration in its purest form, be it letters, pictures, videos, or anything else.
+      <br /><br />
+      Scroll through an endless stream of media – each which has ignited a creative spark in me, and hopefully will do the same for you.
+      <br /><br />
+      No algorithms, no restrictions, just pure, unfiltered inspiration flowing from my mind to your screen. 
+      Dive deep and let your mind wander through this digital constellation of a random access memory.
+    </p>
+  </div>
 
-    
-
-   <p id="anim-p" class="p-6 text-lg">
-        You've stumbled upon <span class="font-bold text-primary">Hua's</span> little
-        corner of the internet, where creativity runs rampant and normal is just
-        a setting on a washing machine.<br />
-        <br />
-        Stick around, explore the digital masterpieces, and enjoy the occasional
-        artistic shenanigans. It's more fun than you'd think!
-        <br />
-        <br />
-        Delight in the unpredictable artistic shenanigans that burst forth from the
-        canvas of this digital universe. Here, every visit is an adventure, every
-        glance an exploration. Dive in, the pixels are warm!
-      </p>
-</div>
-
- <div
-      class="flex justify-center py-12 text-center text-main text-content xl:gap-16"
-    >
-      <div class="w-40">
-        <h2 class="text-xl">Quotes</h2>
-        <p id="art-counter" class="text-3xl font-bold">85</p>
-      </div>
-      <div class="w-40">
-        <h2 class="text-xl">Images</h2>
-        <p id="youtube-counter" class="text-3xl font-bold">896 mb</p>
-      </div>
-      <div class="w-40">
-        <h2 class="text-xl">Videos</h2>
-        <p id="reviews-counter" class="text-3xl font-bold">4k</p>
-      </div>
+  <div
+    class="flex justify-center pb-12 text-center text-main text-content xl:gap-16"
+  >
+    <div class="w-40">
+      <h2 class="text-xl">Computed</h2>
+      <p id="art-counter" class="text-3xl font-bold">85</p>
     </div>
+    <div class="w-40">
+      <h2 class="text-xl">Memory space</h2>
+      <p id="youtube-counter" class="text-3xl font-bold">396</p>
+    </div>
+    <div class="w-40">
+      <h2 class="text-xl line-through">Buffer size</h2>
+      <p id="" class="text-2xl font-thin">Undefined</p>
+    </div>
+  </div>
 
-<div class="relative">
+  <div class="relative">
     <img class="rounded-3xl mt-5" src={Akira.src} alt="Hua's portrait" />
-</div>
-
+  </div>
 </div>
 <div class="mt-12 h-6 w-full bg-black"></div>
 
-
 <script>
-      //Increment
+  //Increment
   function incrementCounter(
     selector: string,
     current: number,
@@ -60,18 +54,18 @@ import Akira from "../assets/akira.jpg"
     duration: number,
     letter: string = ""
   ) {
-    let counter = document.getElementById(selector)
-    let stepTime = Math.abs(Math.floor(duration / target))
+    let counter = document.getElementById(selector);
+    let stepTime = Math.abs(Math.floor(duration / target));
     if (current < target && counter) {
-      current++
-      counter.innerText = current.toString() + letter
+      current++;
+      counter.innerText = current.toString() + letter;
       setTimeout(
         () => incrementCounter(selector, current, target, duration, letter),
         stepTime
-      )
+      );
     }
   }
-  incrementCounter("art-counter", 0, 85, 1000)
-  incrementCounter("youtube-counter", 0, 328, 1000, "k")
-  incrementCounter("reviews-counter", 0, 250, 1000)
+  incrementCounter("art-counter", 0, 248, 1000);
+  incrementCounter("youtube-counter", 0, 396, 1000, "mb");
+  incrementCounter("reviews-counter", 0, 124, 1000);
 </script>
