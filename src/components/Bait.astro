@@ -1,0 +1,458 @@
+---
+import { Image } from "astro:assets";
+import NVision from "../assets/Hyundai-Nvision.png";
+---
+
+<div class="relative mx-auto max-w-7xl px-4 overflow-hidden">
+  <!-- Subtle grid overlay effect -->
+  <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
+  
+  <h1 class="mt-16 mb-6 text-center font-mono text-4xl text-zinc-500">
+    NEURAL CACHE PROCESSES
+  </h1>
+  
+  <p class="text-center font-mono text-zinc-400 mb-12 max-w-3xl mx-auto text-sm">
+    BrainBuffer is my digital nervous system - a neural network with three layers processing thoughts and ideas.
+    <span class="opacity-70">Each layer handles different aspects of my creative process, from audio recordings to visual impressions.</span>
+  </p>
+
+  <!-- Neural network diagram connecting the terminals -->
+  <div class="relative">
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-16 relative z-10">
+    <!-- L1 Terminal Card -->
+      <a href="/L1" class="terminal-card group">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal-title">L1_auditory.sys</div>
+        </div>
+        <div class="terminal-content">
+          <div class="terminal-lines">
+            <div>> initializing auditory cortex_</div>
+            <div>> processing sound patterns</div>
+            <div>> analyzing audio frequencies</div>
+            <div class="text-zinc-300">> [ACTIVE] sonic memory</div>
+          </div>
+          
+          <div class="terminal-placeholder">
+            <div class="audio-waves"></div>
+          </div>
+          
+          <div class="access-text">ACCESS AUDIO MEMORY <span class="blink">▋</span></div>
+      </div>
+    </a>
+    
+    <!-- L2 Terminal Card -->
+      <a href="/L2" class="terminal-card group">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal-title">L2_visual.exe</div>
+        </div>
+        <div class="terminal-content">
+          <div class="terminal-lines">
+            <div>> initializing visual cortex_</div>
+            <div>> processing image data</div>
+            <div>> mapping design aesthetics</div>
+            <div class="text-zinc-300">> [ACTIVE] image cache</div>
+          </div>
+          
+          <div class="terminal-placeholder">
+            <div class="visual-cortex"></div>
+          </div>
+          
+          <div class="access-text">ACCESS IMAGE CACHE <span class="blink">▋</span></div>
+      </div>
+    </a>
+    
+    <!-- L3 Terminal Card -->
+      <a href="/L3" class="terminal-card group">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal-title">L3_semantic.bin</div>
+        </div>
+        <div class="terminal-content">
+          <div class="terminal-lines">
+            <div>> initializing linguistic cortex_</div>
+            <div>> processing textual information</div>
+            <div>> analyzing semantic patterns</div>
+            <div class="text-zinc-300">> [ACTIVE] knowledge base</div>
+          </div>
+          
+          <div class="terminal-placeholder">
+            <div class="language-cortex"></div>
+          </div>
+          
+          <div class="access-text">ACCESS KNOWLEDGE BASE <span class="blink">▋</span></div>
+      </div>
+    </a>
+    </div>
+  </div>
+  
+  <div class="text-center mb-24">
+    <p class="text-zinc-400 font-mono text-sm mb-6 max-w-2xl mx-auto">
+      Each layer represents a part of my cognitive processing. Exploring different media formats helps me organize my digital mind.
+    </p>
+  </div>
+</div>
+
+<style>
+  /* Background grid pattern */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(66, 66, 66, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(66, 66, 66, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Neural network animation */
+  .path-line {
+    stroke-dasharray: 10;
+    animation: dashMove 15s linear infinite;
+  }
+  
+  @keyframes dashMove {
+    to {
+      stroke-dashoffset: 200;
+    }
+  }
+  
+  .synapse-dot {
+    animation: pulseDot 4s infinite alternate;
+  }
+  
+  @keyframes pulseDot {
+    0% { r: 3; opacity: 0.3; }
+    100% { r: 5; opacity: 0.7; }
+  }
+  
+  .synapse-dot:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  .synapse-dot:nth-child(4) {
+    animation-delay: 2s;
+  }
+  
+  /* Terminal card styling */
+  .terminal-card {
+    background: rgba(15, 15, 18, 0.95);
+    border: 1px solid rgba(90, 90, 100, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(100, 100, 110, 0.1);
+    transition: all 0.4s ease-out;
+  }
+  
+  .terminal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(140, 140, 160, 0.3);
+    border-color: rgba(140, 140, 160, 0.5);
+  }
+  
+  .terminal-header {
+    background: rgba(25, 25, 30, 0.95);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(70, 70, 80, 0.3);
+  }
+  
+  .terminal-dots {
+    display: flex;
+    margin-right: 12px;
+  }
+  
+  .terminal-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 3px;
+    opacity: 0.8;
+  }
+  
+  .terminal-dots span:nth-child(1) {
+    background-color: #ff5f56;
+  }
+  
+  .terminal-dots span:nth-child(2) {
+    background-color: #ffbd2e;
+  }
+  
+  .terminal-dots span:nth-child(3) {
+    background-color: #27c93f;
+  }
+  
+  .terminal-title {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .terminal-content {
+    padding: 12px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .terminal-lines {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(200, 200, 210, 0.8);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  
+  .terminal-lines > div {
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: fadeIn 0.6s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  
+  .terminal-lines > div:nth-child(1) { animation-delay: 0.2s; }
+  .terminal-lines > div:nth-child(2) { animation-delay: 0.6s; }
+  .terminal-lines > div:nth-child(3) { animation-delay: 1s; }
+  .terminal-lines > div:nth-child(4) { animation-delay: 1.4s; }
+  
+  .terminal-placeholder {
+    width: 100%;
+    height: 180px;
+    margin: auto 0;
+    border: 1px solid rgba(100, 100, 120, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 22, 30, 0.7);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Audio waves animation for L1 */
+  .audio-waves {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+  
+  .audio-waves::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(40, 40, 60, 0.3) 50%, transparent 100%);
+    animation: scanAudio 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes scanAudio {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .audio-waves::after {
+    content: "";
+    height: 100px;
+    width: 90%;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(160, 160, 180, 0.05) 0%,
+      rgba(160, 160, 180, 0.1) 0.5%,
+      rgba(160, 160, 180, 0.2) 1%,
+      rgba(160, 160, 180, 0.1) 1.5%,
+      rgba(160, 160, 180, 0.05) 2%,
+      rgba(160, 160, 180, 0.2) 2.5%,
+      rgba(160, 160, 180, 0.3) 3%,
+      rgba(160, 160, 180, 0.2) 3.5%,
+      rgba(160, 160, 180, 0.4) 4%,
+      rgba(160, 160, 180, 0.2) 4.5%,
+      rgba(160, 160, 180, 0.5) 5%,
+      rgba(160, 160, 180, 0.3) 5.5%,
+      rgba(160, 160, 180, 0.2) 6%,
+      rgba(160, 160, 180, 0.1) 6.5%,
+      rgba(160, 160, 180, 0.05) 7%,
+      rgba(160, 160, 180, 0.03) 7.5%,
+      rgba(160, 160, 180, 0.02) 8%,
+      rgba(160, 160, 180, 0.01) 8.5%,
+      rgba(160, 160, 180, 0) 9%,
+      rgba(160, 160, 180, 0) 9.5%,
+      rgba(160, 160, 180, 0.01) 10%,
+      rgba(160, 160, 180, 0.02) 10.5%,
+      rgba(160, 160, 180, 0.03) 11%,
+      rgba(160, 160, 180, 0.05) 11.5%,
+      rgba(160, 160, 180, 0.1) 12%,
+      rgba(160, 160, 180, 0.2) 12.5%,
+      rgba(160, 160, 180, 0.3) 13%,
+      rgba(160, 160, 180, 0.2) 13.5%,
+      rgba(160, 160, 180, 0.1) 14%
+    );
+    background-size: 400px 100%;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    animation: waveMove 10s linear infinite alternate;
+  }
+  
+  @keyframes waveMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 400px 0; }
+  }
+  
+  /* Visual cortex animation for L2 */
+  .visual-cortex {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .visual-cortex::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(180, 180, 210, 0.3) 0%,
+      rgba(160, 160, 190, 0.2) 10%,
+      rgba(140, 140, 170, 0.1) 20%,
+      rgba(120, 120, 150, 0.05) 30%,
+      transparent 40%
+    );
+    animation: pulseVisual 4s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulseVisual {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.6; }
+  }
+  
+  .visual-cortex::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(0deg, rgba(100, 100, 130, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100, 100, 130, 0.1) 1px, transparent 1px);
+    background-size: 15px 15px;
+    animation: gridMove 15s linear infinite;
+    opacity: 0.7;
+  }
+  
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 15px 15px; }
+  }
+  
+  /* Language cortex animation for L3 */
+  .language-cortex {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(20, 20, 30, 0.9);
+  }
+  
+  .language-cortex::before {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent 0%,
+        transparent 49.5%,
+        rgba(140, 140, 170, 0.1) 49.5%,
+        rgba(140, 140, 170, 0.1) 50.5%,
+        transparent 50.5%,
+        transparent 100%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 49.5%,
+        rgba(140, 140, 170, 0.1) 49.5%,
+        rgba(140, 140, 170, 0.1) 50.5%,
+        transparent 50.5%,
+        transparent 100%
+      );
+    background-size: 20px 20px;
+    opacity: 0.7;
+    animation: matrixScroll 20s linear infinite;
+  }
+  
+  @keyframes matrixScroll {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(20px) translateX(20px); }
+  }
+  
+  .language-cortex::after {
+    content: "01010101 00101010 11010101 10101010 01101010 10100101 01010101 00101010 11010101";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(160, 160, 180, 0.3);
+    word-break: break-all;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    mask-image: radial-gradient(circle at 50% 50%, black 0%, black 40%, transparent 70%);
+    animation: textPulse 6s infinite alternate;
+  }
+  
+  @keyframes textPulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+  }
+  
+  .access-text {
+    font-family: monospace;
+    font-size: 0.8rem;
+    margin-top: 12px;
+    color: rgba(180, 180, 190, 0.8);
+    text-align: center;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  .terminal-card:hover .access-text {
+    color: rgba(220, 220, 230, 0.9);
+  }
+  
+  .blink {
+    animation: blinkCursor 1s infinite step-end;
+  }
+  
+  @keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>

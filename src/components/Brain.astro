@@ -1,0 +1,736 @@
+---
+
+---
+
+<div
+  class="relative py-16 px-4 overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950"
+>
+  <div class="max-w-6xl mx-auto">
+    <header class="mb-12 text-center">
+      <div
+        class="inline-block px-4 py-1 rounded-full bg-green-900/30 text-green-400 text-sm mb-4 border border-green-500/20"
+      >
+        <span class="mr-2">$</span>neural_network.initialize()
+      </div>
+      <h1
+        class="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600"
+      >
+        Neural.Cache
+      </h1>
+      <div class="flex items-center justify-center space-x-2 text-gray-400">
+        <span class="block h-px w-12 bg-green-500/50"></span>
+        <p class="text-lg">My brain's personal memory architecture</p>
+        <span class="block h-px w-12 bg-green-500/50"></span>
+      </div>
+    </header>
+
+    <!-- Neural network canvas -->
+    <div class="relative h-[500px] mb-12">
+      <div class="absolute inset-0 z-0">
+        <canvas id="brainCanvas" class="w-full h-full"></canvas>
+      </div>
+
+      <div class="relative z-10 max-w-5xl mx-auto">
+        <div
+          class="terminal-window bg-gray-950 border border-green-500/30 rounded-lg p-6 mb-12 shadow-[0_0_30px_rgba(74,222,128,0.1)]"
+        >
+          <div class="flex items-center mb-4">
+            <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <div class="ml-4 text-xs text-gray-500">~/neural-cache</div>
+          </div>
+          <div class="space-y-2 text-sm md:text-base">
+            <p class="flex">
+              <span class="text-green-400 mr-2">$</span>
+              <span class="text-gray-300">cat README.md</span>
+            </p>
+            <div
+              class="pl-4 text-gray-400 space-y-2 border-l border-green-500/20"
+            >
+              <p>
+                Welcome to my neural network cache - a digital extension of my
+                consciousness where I store everything that inspires me. Like a
+                CPU's cache hierarchy, I've organized my thoughts into three
+                distinct levels.
+              </p>
+              <p>
+                <span class="text-green-400">struct</span>
+                <span class="text-yellow-400">NeuralCache</span>
+                {"{"}
+                <br />
+                <span class="pl-4">L1Cache textMemory;</span>
+                <span class="text-gray-600"
+                  >// Fast access, high priority thoughts</span
+                >
+                <br />
+                <span class="pl-4">L2Cache imageMemory;</span>
+                <span class="text-gray-600">// Visual data processing</span>
+                <br />
+                <span class="pl-4">L3Cache videoMemory;</span>
+                <span class="text-gray-600"
+                  >// Complex emotional processing</span
+                >
+                <br />
+                {"}"};
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cache Level Cards -->
+    <div class="grid grid-cols-1 gap-8 mb-16">
+      <!-- L1 Cache -->
+      <div class="cache-level relative" data-level="0">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-green-500/5 to-transparent rounded-lg transform -skew-x-6"
+        >
+        </div>
+        <a href="/L1">
+          <div
+            class="relative group bg-gray-900/80 backdrop-blur-sm border border-green-500/30 rounded-lg p-8 transition-all duration-300 hover:border-green-500 hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
+          >
+            <div class="flex flex-col md:flex-row items-start md:items-center">
+              <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                <div class="relative">
+                  <div
+                    class="absolute inset-0 bg-green-500/20 rounded-full blur-xl"
+                  >
+                  </div>
+                  <div
+                    class="relative flex items-center justify-center w-16 h-16 rounded-full bg-gray-950 border border-green-500/50 text-green-400"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-code"
+                      ><polyline points="16 18 22 12 16 6"></polyline><polyline
+                        points="8 6 2 12 8 18"></polyline></svg
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center mb-2">
+                  <div
+                    class="flex-shrink-0 w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"
+                  >
+                  </div>
+                  <h3 class="text-xl font-bold text-green-400">L1 Cache</h3>
+                  <div
+                    class="ml-3 px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >
+                    <code>0x01</code>
+                  </div>
+                </div>
+                <p class="text-gray-400 mb-4">
+                  Text elements - quotes, code snippets, and thoughts that
+                  compile directly into my consciousness.
+                </p>
+                <div
+                  class="flex items-center text-green-400 group-hover:translate-x-1 transition-transform"
+                >
+                  <span class="mr-2 text-sm">$ memory_fetch --level=L1</span>
+                  <span class="group-hover:ml-1 transition-all">→</span>
+                </div>
+              </div>
+              <div class="hidden md:block md:ml-6 text-right">
+                <div class="text-xs text-gray-500 mb-1">Memory Access</div>
+                <div class="text-green-400 font-bold">~1 cycle</div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-green-500/10">
+              <div class="flex items-center">
+                <div
+                  class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div
+                    class="bg-gradient-to-r from-green-500 to-emerald-400 h-full rounded-full"
+                    style="width: 78%;"
+                  >
+                  </div>
+                </div>
+                <span class="ml-3 text-xs text-gray-400">78% full</span>
+              </div>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#thoughts</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#code</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#quotes</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#algorithms</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- L2 Cache -->
+      <div class="cache-level relative" data-level="1">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-green-500/5 to-transparent rounded-lg transform -skew-x-6"
+        >
+        </div>
+        <a href="/L2">
+          <div
+            class="relative group bg-gray-900/80 backdrop-blur-sm border border-green-500/30 rounded-lg p-8 transition-all duration-300 hover:border-green-500 hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
+          >
+            <div class="flex flex-col md:flex-row items-start md:items-center">
+              <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                <div class="relative">
+                  <div
+                    class="absolute inset-0 bg-green-500/20 rounded-full blur-xl"
+                  >
+                  </div>
+                  <div
+                    class="relative flex items-center justify-center w-16 h-16 rounded-full bg-gray-950 border border-green-500/50 text-green-400"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-image"
+                      ><rect width="18" height="18" x="3" y="3" rx="2" ry="2"
+                      ></rect><circle cx="9" cy="9" r="2"></circle><path
+                        d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                      ></path></svg
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center mb-2">
+                  <div
+                    class="flex-shrink-0 w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"
+                  >
+                  </div>
+                  <h3 class="text-xl font-bold text-green-400">L2 Cache</h3>
+                  <div
+                    class="ml-3 px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >
+                    <code>0x02</code>
+                  </div>
+                </div>
+                <p class="text-gray-400 mb-4">
+                  Image media - visual data that my neural pathways process and
+                  store for creative reference.
+                </p>
+                <div
+                  class="flex items-center text-green-400 group-hover:translate-x-1 transition-transform"
+                >
+                  <span class="mr-2 text-sm">$ memory_fetch --level=L2</span>
+                  <span class="group-hover:ml-1 transition-all">→</span>
+                </div>
+              </div>
+              <div class="hidden md:block md:ml-6 text-right">
+                <div class="text-xs text-gray-500 mb-1">Memory Access</div>
+                <div class="text-green-400 font-bold">~10 cycles</div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-green-500/10">
+              <div class="flex items-center">
+                <div
+                  class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div
+                    class="bg-gradient-to-r from-green-500 to-emerald-400 h-full rounded-full"
+                    style="width: 45%;"
+                  >
+                  </div>
+                </div>
+                <span class="ml-3 text-xs text-gray-400">45% full</span>
+              </div>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#visuals</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#designs</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#art</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#photography</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- L3 Cache -->
+      <div class="cache-level relative" data-level="2">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-green-500/5 to-transparent rounded-lg transform -skew-x-6"
+        >
+        </div>
+        <a href="/L3">
+          <div
+            class="relative group bg-gray-900/80 backdrop-blur-sm border border-green-500/30 rounded-lg p-8 transition-all duration-300 hover:border-green-500 hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
+          >
+            <div class="flex flex-col md:flex-row items-start md:items-center">
+              <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                <div class="relative">
+                  <div
+                    class="absolute inset-0 bg-green-500/20 rounded-full blur-xl"
+                  >
+                  </div>
+                  <div
+                    class="relative flex items-center justify-center w-16 h-16 rounded-full bg-gray-950 border border-green-500/50 text-green-400"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-play"
+                      ><polygon points="5 3 19 12 5 21 5 3"></polygon></svg
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center mb-2">
+                  <div
+                    class="flex-shrink-0 w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"
+                  >
+                  </div>
+                  <h3 class="text-xl font-bold text-green-400">L3 Cache</h3>
+                  <div
+                    class="ml-3 px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >
+                    <code>0x03</code>
+                  </div>
+                </div>
+                <p class="text-gray-400 mb-4">
+                  Video elements - dynamic memory blocks that execute complex
+                  emotional and intellectual functions.
+                </p>
+                <div
+                  class="flex items-center text-green-400 group-hover:translate-x-1 transition-transform"
+                >
+                  <span class="mr-2 text-sm">$ memory_fetch --level=L3</span>
+                  <span class="group-hover:ml-1 transition-all">→</span>
+                </div>
+              </div>
+              <div class="hidden md:block md:ml-6 text-right">
+                <div class="text-xs text-gray-500 mb-1">Memory Access</div>
+                <div class="text-green-400 font-bold">~100 cycles</div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-green-500/10">
+              <div class="flex items-center">
+                <div
+                  class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden"
+                >
+                  <div
+                    class="bg-gradient-to-r from-green-500 to-emerald-400 h-full rounded-full"
+                    style="width: 23%;"
+                  >
+                  </div>
+                </div>
+                <span class="ml-3 text-xs text-gray-400">23% full</span>
+              </div>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#videos</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#animations</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#tutorials</span
+                >
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-gray-800 text-gray-400"
+                  >#experiences</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="text-center text-gray-500 mt-16">
+      <div
+        class="inline-block px-4 py-2 rounded-lg bg-gray-900/80 backdrop-blur-sm border border-green-500/20"
+      >
+        <p class="text-sm">
+          <span class="text-green-400">while</span> (true) {"{"}
+          <span class="text-green-400 ml-2">collect</span>(inspiration);
+          <span class="text-green-400 ml-2">store</span>(neural_cache);
+          {"}"}
+        </p>
+        <p class="text-xs mt-2 text-gray-600">
+          // Memory architecture initialized: <span id="current-date"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background grid effect -->
+  <div class="fixed inset-0 bg-grid-pattern opacity-5 pointer-events-none">
+  </div>
+</div>
+
+<style>
+  .bg-grid-pattern {
+    background-size: 50px 50px;
+    background-image: linear-gradient(
+        to right,
+        rgba(74, 222, 128, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(74, 222, 128, 0.05) 1px, transparent 1px);
+  }
+
+  .cache-level:hover {
+    z-index: 10;
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(74, 222, 128, 0.4);
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Set current date
+    const dateElement = document.getElementById("current-date");
+    if (dateElement) {
+      const today = new Date();
+      dateElement.textContent = today.toLocaleDateString();
+    }
+
+    // Neural Network Canvas Setup
+    const canvas = document.getElementById("brainCanvas") as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Neural network nodes
+    const nodes: {
+      x: number;
+      y: number;
+      radius: number;
+      type: number;
+      vx: number;
+      vy: number;
+    }[] = [];
+
+    // Create nodes
+    const createNodes = () => {
+      nodes.length = 0;
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+
+      // Create L1 nodes (left side)
+      for (let i = 0; i < 8; i++) {
+        nodes.push({
+          x: width * 0.2,
+          y: height * (0.2 + i * 0.1),
+          radius: 4,
+          type: 0, // L1 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+
+      // Create L2 nodes (middle)
+      for (let i = 0; i < 6; i++) {
+        nodes.push({
+          x: width * 0.5,
+          y: height * (0.25 + i * 0.1),
+          radius: 5,
+          type: 1, // L2 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+
+      // Create L3 nodes (right side)
+      for (let i = 0; i < 4; i++) {
+        nodes.push({
+          x: width * 0.8,
+          y: height * (0.3 + i * 0.12),
+          radius: 6,
+          type: 2, // L3 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+    };
+
+    createNodes();
+    window.addEventListener("resize", createNodes);
+
+    // Animation variables
+    let animationFrameId: number;
+    let particleTime = 0;
+    const particles: {
+      x: number;
+      y: number;
+      progress: number;
+      startNode: number;
+      endNode: number;
+    }[] = [];
+
+    // Track active node
+    let activeNode: number | null = null;
+
+    // Mouse interaction
+    const cacheLevels = document.querySelectorAll(".cache-level");
+    cacheLevels.forEach((level) => {
+      level.addEventListener("mouseenter", () => {
+        activeNode = parseInt((level as HTMLElement).dataset.level || "0", 10);
+      });
+
+      level.addEventListener("mouseleave", () => {
+        activeNode = null;
+      });
+    });
+
+    // Animation function
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+      // Draw connections between nodes
+      ctx.lineWidth = 0.5;
+
+      // L1 to L2 connections
+      for (let i = 0; i < 8; i++) {
+        for (let j = 8; j < 14; j++) {
+          const opacity = 0.1 + (Math.sin(Date.now() / 3000 + i * j) + 1) * 0.1;
+          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // L2 to L3 connections
+      for (let i = 8; i < 14; i++) {
+        for (let j = 14; j < 18; j++) {
+          const opacity = 0.1 + (Math.sin(Date.now() / 2500 + i * j) + 1) * 0.1;
+          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // Update and draw nodes
+      nodes.forEach((node, index) => {
+        // Subtle movement
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Boundary check and reverse direction
+        if (node.x < node.radius || node.x > canvas.offsetWidth - node.radius) {
+          node.vx *= -1;
+        }
+        if (
+          node.y < node.radius ||
+          node.y > canvas.offsetHeight - node.radius
+        ) {
+          node.vy *= -1;
+        }
+
+        // Keep nodes in their general area
+        if (
+          node.type === 0 &&
+          (node.x < canvas.offsetWidth * 0.15 ||
+            node.x > canvas.offsetWidth * 0.25)
+        ) {
+          node.vx *= -1;
+        }
+        if (
+          node.type === 1 &&
+          (node.x < canvas.offsetWidth * 0.45 ||
+            node.x > canvas.offsetWidth * 0.55)
+        ) {
+          node.vx *= -1;
+        }
+        if (
+          node.type === 2 &&
+          (node.x < canvas.offsetWidth * 0.75 ||
+            node.x > canvas.offsetWidth * 0.85)
+        ) {
+          node.vx *= -1;
+        }
+
+        // Draw node
+        ctx.beginPath();
+
+        // Different colors for different node types
+        if (node.type === 0) {
+          ctx.fillStyle = activeNode === 0 ? "#4ade80" : "#22c55e";
+        } else if (node.type === 1) {
+          ctx.fillStyle = activeNode === 1 ? "#4ade80" : "#22c55e";
+        } else {
+          ctx.fillStyle = activeNode === 2 ? "#4ade80" : "#22c55e";
+        }
+
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow effect
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          node.x,
+          node.y,
+          node.radius,
+          node.x,
+          node.y,
+          node.radius * 4
+        );
+        gradient.addColorStop(
+          0,
+          `rgba(74, 222, 128, ${activeNode === node.type ? 0.3 : 0.1})`
+        );
+        gradient.addColorStop(1, "rgba(74, 222, 128, 0)");
+        ctx.fillStyle = gradient;
+        ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Create new particles occasionally
+      particleTime++;
+      if (particleTime > 20) {
+        particleTime = 0;
+
+        // L1 to L2 particle
+        const startNode = Math.floor(Math.random() * 8);
+        const endNode = 8 + Math.floor(Math.random() * 6);
+        particles.push({
+          x: nodes[startNode].x,
+          y: nodes[startNode].y,
+          progress: 0,
+          startNode,
+          endNode,
+        });
+
+        // L2 to L3 particle
+        const startNode2 = 8 + Math.floor(Math.random() * 6);
+        const endNode2 = 14 + Math.floor(Math.random() * 4);
+        particles.push({
+          x: nodes[startNode2].x,
+          y: nodes[startNode2].y,
+          progress: 0,
+          startNode: startNode2,
+          endNode: endNode2,
+        });
+      }
+
+      // Update and draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.progress += 0.01;
+
+        if (particle.progress >= 1) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        const startNode = nodes[particle.startNode];
+        const endNode = nodes[particle.endNode];
+
+        particle.x =
+          startNode.x + (endNode.x - startNode.x) * particle.progress;
+        particle.y =
+          startNode.y + (endNode.y - startNode.y) * particle.progress;
+
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(74, 222, 128, 0.8)";
+        ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", createNodes);
+      cancelAnimationFrame(animationFrameId);
+    };
+  });
+</script>

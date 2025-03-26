@@ -1,0 +1,336 @@
+---
+interface Props {
+  height?: string;
+  particleSpeed?: number;
+  nodeSize?: number;
+}
+
+const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
+---
+
+<div class="neural-network-container" style={`height: ${height};`}>
+  <canvas id="neuralNetworkCanvas" class="w-full h-full"></canvas>
+</div>
+
+<style>
+  .neural-network-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+</style>
+
+<script define:vars={{ particleSpeed, nodeSize }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("neuralNetworkCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Neural network nodes
+    const nodes = [];
+
+    // Create nodes
+    const createNodes = () => {
+      nodes.length = 0;
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+
+      const l1Count = Math.max(8, Math.floor(height / 80));
+      const l2Count = Math.max(6, Math.floor(height / 100));
+      const l3Count = Math.max(4, Math.floor(height / 120));
+
+      // Create L1 nodes (left side)
+      for (let i = 0; i < l1Count; i++) {
+        nodes.push({
+          x: width * 0.2,
+          y: height * (0.1 + i * (0.8 / l1Count)),
+          radius: 4 * nodeSize,
+          type: 0, // L1 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+
+      // Create L2 nodes (middle)
+      for (let i = 0; i < l2Count; i++) {
+        nodes.push({
+          x: width * 0.5,
+          y: height * (0.15 + i * (0.7 / l2Count)),
+          radius: 5 * nodeSize,
+          type: 1, // L2 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+
+      // Create L3 nodes (right side)
+      for (let i = 0; i < l3Count; i++) {
+        nodes.push({
+          x: width * 0.8,
+          y: height * (0.2 + i * (0.6 / l3Count)),
+          radius: 6 * nodeSize,
+          type: 2, // L3 cache
+          vx: Math.random() * 0.2 - 0.1,
+          vy: Math.random() * 0.2 - 0.1,
+        });
+      }
+    };
+
+    createNodes();
+    window.addEventListener("resize", createNodes);
+
+    // Animation variables
+    let animationFrameId;
+    let particleTime = 0;
+    const particles = [];
+
+    // Track active node
+    let activeNode = null;
+
+    // Mouse position tracking
+    let mouseX = -1000;
+    let mouseY = -1000;
+
+    canvas.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    // Animation function
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+
+      // Find closest node to mouse
+      let closestDist = Infinity;
+      activeNode = null;
+
+      nodes.forEach((node, index) => {
+        const dx = node.x - mouseX;
+        const dy = node.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < closestDist && dist < 100) {
+          closestDist = dist;
+          activeNode = node.type;
+        }
+      });
+
+      // Draw connections between nodes
+      ctx.lineWidth = 0.5;
+
+      // L1 to L2 connections
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].type !== 0) continue;
+
+        for (let j = 0; j < nodes.length; j++) {
+          if (nodes[j].type !== 1) continue;
+
+          const opacity =
+            0.05 + (Math.sin(Date.now() / 3000 + i * j) + 1) * 0.05;
+          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // L2 to L3 connections
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].type !== 1) continue;
+
+        for (let j = 0; j < nodes.length; j++) {
+          if (nodes[j].type !== 2) continue;
+
+          const opacity =
+            0.05 + (Math.sin(Date.now() / 2500 + i * j) + 1) * 0.05;
+          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // Update and draw nodes
+      nodes.forEach((node, index) => {
+        // Subtle movement
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Boundary check and reverse direction
+        if (node.x < node.radius || node.x > canvas.offsetWidth - node.radius) {
+          node.vx *= -1;
+        }
+        if (
+          node.y < node.radius ||
+          node.y > canvas.offsetHeight - node.radius
+        ) {
+          node.vy *= -1;
+        }
+
+        // Keep nodes in their general area
+        if (
+          node.type === 0 &&
+          (node.x < canvas.offsetWidth * 0.15 ||
+            node.x > canvas.offsetWidth * 0.25)
+        ) {
+          node.vx *= -1;
+        }
+        if (
+          node.type === 1 &&
+          (node.x < canvas.offsetWidth * 0.45 ||
+            node.x > canvas.offsetWidth * 0.55)
+        ) {
+          node.vx *= -1;
+        }
+        if (
+          node.type === 2 &&
+          (node.x < canvas.offsetWidth * 0.75 ||
+            node.x > canvas.offsetWidth * 0.85)
+        ) {
+          node.vx *= -1;
+        }
+
+        // Draw node
+        ctx.beginPath();
+
+        // Different colors for different node types
+        if (node.type === 0) {
+          ctx.fillStyle = activeNode === 0 ? "#4ade80" : "#22c55e";
+        } else if (node.type === 1) {
+          ctx.fillStyle = activeNode === 1 ? "#4ade80" : "#22c55e";
+        } else {
+          ctx.fillStyle = activeNode === 2 ? "#4ade80" : "#22c55e";
+        }
+
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow effect
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          node.x,
+          node.y,
+          node.radius,
+          node.x,
+          node.y,
+          node.radius * 4
+        );
+        gradient.addColorStop(
+          0,
+          `rgba(74, 222, 128, ${activeNode === node.type ? 0.3 : 0.1})`
+        );
+        gradient.addColorStop(1, "rgba(74, 222, 128, 0)");
+        ctx.fillStyle = gradient;
+        ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Create new particles occasionally
+      particleTime++;
+      if (particleTime > 20) {
+        particleTime = 0;
+
+        // Get L1 nodes
+        const l1Nodes = nodes.filter((node) => node.type === 0);
+        // Get L2 nodes
+        const l2Nodes = nodes.filter((node) => node.type === 1);
+        // Get L3 nodes
+        const l3Nodes = nodes.filter((node) => node.type === 2);
+
+        if (l1Nodes.length && l2Nodes.length) {
+          // L1 to L2 particle
+          const startNodeIndex = Math.floor(Math.random() * l1Nodes.length);
+          const endNodeIndex = Math.floor(Math.random() * l2Nodes.length);
+
+          particles.push({
+            x: l1Nodes[startNodeIndex].x,
+            y: l1Nodes[startNodeIndex].y,
+            progress: 0,
+            startX: l1Nodes[startNodeIndex].x,
+            startY: l1Nodes[startNodeIndex].y,
+            endX: l2Nodes[endNodeIndex].x,
+            endY: l2Nodes[endNodeIndex].y,
+            type: 0,
+          });
+        }
+
+        if (l2Nodes.length && l3Nodes.length) {
+          // L2 to L3 particle
+          const startNodeIndex = Math.floor(Math.random() * l2Nodes.length);
+          const endNodeIndex = Math.floor(Math.random() * l3Nodes.length);
+
+          particles.push({
+            x: l2Nodes[startNodeIndex].x,
+            y: l2Nodes[startNodeIndex].y,
+            progress: 0,
+            startX: l2Nodes[startNodeIndex].x,
+            startY: l2Nodes[startNodeIndex].y,
+            endX: l3Nodes[endNodeIndex].x,
+            endY: l3Nodes[endNodeIndex].y,
+            type: 1,
+          });
+        }
+      }
+
+      // Update and draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.progress += particleSpeed;
+
+        if (particle.progress >= 1) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        // Apply easing for more natural movement
+        const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+        const ease = easeInOut(particle.progress);
+
+        particle.x = particle.startX + (particle.endX - particle.startX) * ease;
+        particle.y = particle.startY + (particle.endY - particle.startY) * ease;
+
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(74, 222, 128, 0.8)";
+        ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Optional: add particle trail
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(74, 222, 128, 0.2)";
+        ctx.arc(particle.x, particle.y, 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", createNodes);
+      cancelAnimationFrame(animationFrameId);
+    };
+  });
+</script>
