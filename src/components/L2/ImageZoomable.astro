@@ -1,0 +1,78 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  zoomFactor?: number;
+  aspectRatio?: "square" | "wide" | "portrait" | "auto";
+}
+
+const { src, alt, caption, zoomFactor = 2, aspectRatio = "auto" } = Astro.props;
+
+const aspectRatioClasses = {
+  square: "aspect-square",
+  wide: "aspect-video",
+  portrait: "aspect-[2/3]",
+  auto: "",
+};
+---
+
+<div class="my-32 mx-auto max-w-6xl px-8">
+  <div class="space-y-3">
+    <div class="font-mono text-xs text-black/40">
+      <span>DETAIL_ANALYSIS: {alt}</span>
+    </div>
+
+    <div
+      class={`border border-black/10 overflow-hidden ${aspectRatioClasses[aspectRatio]} relative zoom-container`}
+    >
+      <div
+        class="absolute inset-0 bg-black/5 flex items-center justify-center z-20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+      >
+        <div class="font-mono text-xs text-white bg-black/50 px-2 py-1 rounded">
+          HOVER_TO_MAGNIFY
+        </div>
+      </div>
+
+      <img
+        src={src}
+        alt={alt}
+        class="w-full h-full object-cover transition-transform duration-500 zoom-image"
+      />
+    </div>
+
+    {caption && <p class="text-sm text-black/70">{caption}</p>}
+  </div>
+</div>
+
+<style define:vars={{ zoomFactor }}>
+  .zoom-container {
+    cursor: zoom-in;
+  }
+
+  .zoom-container .zoom-image {
+    transform-origin: 0 0;
+  }
+
+  .zoom-container:hover .zoom-image {
+    transform: scale(var(--zoomFactor));
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const containers = document.querySelectorAll(".zoom-container");
+
+    containers.forEach((container) => {
+      const image = container.querySelector(".zoom-image");
+
+      container.addEventListener("mousemove", (e) => {
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+
+        image.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+      });
+    });
+  });
+</script>

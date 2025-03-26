@@ -1,0 +1,107 @@
+---
+interface Detail {
+  x: number; // 0-100 percentage
+  y: number; // 0-100 percentage
+  label: string;
+  description: string;
+}
+
+interface Props {
+  src: string;
+  alt: string;
+  details: Detail[];
+  title?: string;
+}
+
+const { src, alt, details, title } = Astro.props;
+const id = `detail-image-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="my-32 mx-auto max-w-6xl px-8">
+  <div class="space-y-4">
+    <div class="font-mono text-xs text-black/40">
+      <span>DETAIL_ANALYSIS: {title || alt}</span>
+    </div>
+
+    <div class="relative border border-black/10 overflow-hidden" id={id}>
+      <img src={src} alt={alt} class="w-full object-cover" />
+
+      {
+        details.map((detail, index) => (
+          <div class="absolute" style={`left: ${detail.x}%; top: ${detail.y}%;`}>
+            <button
+              class="w-5 h-5 flex items-center justify-center bg-black/30 hover:bg-black/50 text-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-10 transition-colors focus:outline-none detail-marker"
+              data-index={index}
+              aria-label={`Show details for ${detail.label}`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            
+            <div class="absolute left-0 top-0 bg-black/75 text-white p-3 rounded-sm text-sm shadow-lg opacity-0 pointer-events-none detail-popup min-w-[150px] max-w-[200px] transform -translate-y-full -translate-x-1/4 mb-2 z-20">
+              <div class="font-medium text-sm">{detail.label}</div>
+              <div class="text-xs mt-1 text-white/80">{detail.description}</div>
+              <div class="absolute bottom-0 left-6 w-2 h-2 bg-black/75 transform rotate-45 translate-y-1"></div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="text-xs font-mono text-black/40 text-center">
+      CLICK ON MARKERS TO VIEW DETAILS
+    </div>
+  </div>
+</div>
+
+<style>
+  .detail-popup.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script define:vars={{ id }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById(id);
+    if (!container) return;
+
+    const markers = container.querySelectorAll(".detail-marker");
+    const popups = container.querySelectorAll(".detail-popup");
+    let activePopup = null;
+    
+    // Close popup when clicking elsewhere
+    document.addEventListener('click', (e) => {
+      if (activePopup && !e.target.closest('.detail-marker')) {
+        activePopup.classList.remove('active');
+        activePopup = null;
+      }
+    });
+
+    markers.forEach((marker, i) => {
+      const popup = marker.nextElementSibling;
+      
+      marker.addEventListener("click", (e) => {
+        e.stopPropagation();
+        
+        // If clicking the same marker, toggle popup
+        if (activePopup === popup) {
+          popup.classList.remove('active');
+          activePopup = null;
+          return;
+        }
+        
+        // Close any open popup
+        if (activePopup) {
+          activePopup.classList.remove('active');
+        }
+        
+        // Open this popup
+        popup.classList.add('active');
+        activePopup = popup;
+      });
+    });
+  });
+</script>

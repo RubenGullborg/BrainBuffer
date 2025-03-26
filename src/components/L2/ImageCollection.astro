@@ -1,0 +1,150 @@
+---
+interface ImageItem {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: ImageItem[];
+  layout?: "masonry" | "stack" | "cards";
+  title?: string;
+}
+
+const { images, layout = "masonry", title } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-5xl px-8">
+  <div class="space-y-6">
+    <div
+      class="font-mono text-xs text-black/40 flex justify-between items-center"
+    >
+      <span>VISUAL_COLLECTION: {title || "IMAGE_NEURONS"}</span>
+      <span>LAYOUT_MODE: {layout.toUpperCase()}</span>
+    </div>
+
+    {
+      layout === "masonry" && (
+        <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+          {images.map((image, index) => (
+            <div class="break-inside-avoid mb-4">
+              <div class="border border-black/10 overflow-hidden">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="w-full object-cover hover:opacity-90 transition-opacity"
+                />
+              </div>
+              {image.caption && (
+                <p class="text-xs text-black/60 mt-1">{image.caption}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      layout === "stack" && (
+        <div class="relative h-[500px] max-w-2xl mx-auto overflow-hidden border border-black/10">
+          <div class="relative h-full w-full overflow-auto p-8">
+            <div class="relative min-h-full flex items-center justify-center">
+              {images.map((image, index) => {
+                const rotation = Math.random() * 6 - 3;
+                const translateX = Math.random() * 40 - 20;
+                const translateY = Math.random() * 30 - 15;
+                return (
+                  <div
+                    class="absolute border border-black/10 overflow-hidden bg-white shadow-md max-w-[80%] transition-all duration-300 hover:shadow-xl stack-image"
+                    style={`transform: rotate(${rotation}deg) translate(${translateX}px, ${translateY}px); z-index: ${10 + index};`}
+                    data-index={index.toString()}
+                    data-original-z={`${10 + index}`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="max-w-full max-h-[300px] object-cover"
+                    />
+                    {image.caption && (
+                      <div class="text-xs text-black/60 p-2 font-mono border-t border-black/5 bg-white">
+                        <div class="text-black/40">CAPTION:</div>
+                        {image.caption}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      layout === "cards" && (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {images.map((image, index) => (
+            <div class="group">
+              <div class="border border-black/10 overflow-hidden bg-black/2">
+                <div class="aspect-[4/3] overflow-hidden relative">
+                  <div class="absolute top-2 right-2 bg-black/20 px-1 py-0.5 text-xs font-mono text-black/60 z-10">
+                    IMAGE.{(index + 1).toString().padStart(2, '0')}
+                  </div>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                {image.caption && (
+                  <div class="p-3 border-t border-black/10 font-mono">
+                    <div class="text-xs text-black/40 mb-1">DESCRIPTOR:</div>
+                    <p class="text-sm">{image.caption}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+    
+    {layout === "stack" && (
+      <div class="text-xs font-mono text-black/40 text-center mt-2">
+        INTERACTION: HOVER OVER IMAGES TO BRING FORWARD
+      </div>
+    )}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Find all stack image containers
+    const stackContainers = document.querySelectorAll('.relative.h-\\[500px\\]');
+    
+    stackContainers.forEach(container => {
+      const stackImages = container.querySelectorAll('.stack-image');
+      const baseZIndex = 10;
+      const maxZIndex = baseZIndex + stackImages.length;
+      
+      // Add mouse events to each image
+      stackImages.forEach((image) => {
+        image.addEventListener('mouseenter', () => {
+          // Reset all images to their original z-index
+          stackImages.forEach(img => {
+            const indexStr = img.getAttribute('data-index') || '0';
+            const originalZ = img.getAttribute('data-original-z') || '10';
+            if (img instanceof HTMLElement) {
+              img.style.zIndex = originalZ;
+            }
+          });
+          
+          // Bring current image to front
+          if (image instanceof HTMLElement) {
+            image.style.zIndex = (maxZIndex + 10).toString();
+          }
+        });
+      });
+    });
+  });
+</script>

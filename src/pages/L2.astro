@@ -1,11 +1,16 @@
 ---
 import akira from "../assets/akira.jpg";
+import Avatar from "../assets/avatar.jpg";
 import MainLayout from "../layouts/main-layout.astro";
 import ImageFull from "../components/L2/ImageFull.astro";
 import ImageGrid from "../components/L2/ImageGrid.astro";
 import ImageCompare from "../components/L2/ImageCompare.astro";
 import ImageMoodBoard from "../components/L2/ImageMoodBoard.astro";
 import ImageSpotlight from "../components/L2/ImageSpotlight.astro";
+import ImageTimeline from "../components/L2/ImageTimeline.astro";
+import ImageDetails from "../components/L2/ImageDetails.astro";
+import ImageCollection from "../components/L2/ImageCollection.astro";
+import ImageZoomable from "../components/L2/ImageZoomable.astro";
 ---
 
 <MainLayout title="L2 Cache">
@@ -29,7 +34,10 @@ import ImageSpotlight from "../components/L2/ImageSpotlight.astro";
         caption:
           "Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo",
       },
+
+      
     ]}
+    columns={3}
     title="Akira"
   />
 
@@ -69,5 +77,49 @@ import ImageSpotlight from "../components/L2/ImageSpotlight.astro";
     description="A futuristic vision of a post-apocalyptic Tokyo"
     timestamp="2024-01-01_13:43:21"
   />
+
+  <ImageTimeline
+    items={[
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)", date: "2024-01-01" },
+    ]}  
+    title="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageDetails
+    src={akira.src}
+    alt="Akira"
+    details={[
+      { x: 50, y: 60, label: "Akira", description: "Akira (1988)" },
+      { x: 30, y: 40, label: "Akira", description: "Akira (1988)" },
+      { x: 70, y: 80, label: "Akira", description: "Akira (1988)" },
+
+    ]}
+    title="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageCollection
+    images={[
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)" },
+      { src: Avatar.src, alt: "Akira", caption: "Akira (1988)" },
+      { src: akira.src, alt: "Akira", caption: "Akira (1988)" },
+    ]}
+    layout="stack"
+    title="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+  />
+
+  <ImageZoomable
+    src={akira.src}
+    alt="Akira (1988) - A futuristic vision of a post-apocalyptic Tokyo"
+    caption="Akira (1988)"
+    zoomFactor={1.5}
+    aspectRatio="auto"
+  />
+
 
 </MainLayout>

@@ -1,0 +1,70 @@
+---
+interface TimelineItem {
+  src: string;
+  alt: string;
+  caption: string;
+  date: string;
+  description?: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+  title?: string;
+}
+
+const { items, title } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-5xl px-8">
+  <div class="space-y-6">
+    <div class="font-mono text-xs md:text-center text-black/40">
+      <span>CHRONOLOGICAL_SEQUENCE: {title || "TEMPORAL_MEMORY_CHAIN"}</span>
+    </div>
+
+    <div class="space-y-16 relative">
+      {/* Timeline center line */}
+      <div
+        class="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-px bg-black/10 -translate-x-1/2 z-0"
+      >
+      </div>
+
+      {
+        items.map((item, index) => (
+          <div
+            class={`relative z-10 flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+          >
+            <div class="ml-8 md:ml-0 mb-4 md:mb-0 font-mono text-sm md:w-[calc(50%-20px)] md:px-4 text-black/60 md:text-right md:pt-[96px]">
+              {item.date}
+            </div>
+
+            {/* Image and content */}
+            <div class="ml-8 md:ml-0 md:w-[calc(50%-20px)] md:px-4">
+              <div class="border border-black/10 overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  class="w-full object-cover"
+                />
+              </div>
+              <h3 class="text-lg font-medium mt-3 ml-4">{item.caption}</h3>
+              {item.description && (
+                <p class="text-sm text-black/70 mt-2">{item.description}</p>
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+      {/* Timeline end marker */}
+      <div
+        class="absolute left-[15px] md:left-1/2 bottom-0 w-[10px] h-[10px] rounded-full bg-black/20 border-2 border-white -translate-x-1/2 translate-y-10"
+      >
+      </div>
+      <div
+        class="absolute left-[15px] md:left-1/2 bottom-0 font-mono text-xs -translate-x-1/2 translate-y-16 text-black/40"
+      >
+        TIMELINE_END
+      </div>
+    </div>
+  </div>
+</div>
