@@ -1,0 +1,67 @@
+---
+interface Props {
+  content: string;
+  author: string;
+  source?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const { content, author, source, date, tags = [] } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="space-y-8">
+    {/* Technical Header */}
+    <div class="font-mono text-xs text-black/40 space-y-1">
+      <div>CACHE_TYPE: QUOTED_MEMORY</div>
+      {date && <div>TIMESTAMP: {date}</div>}
+    </div>
+
+    {/* Quote Content */}
+    <blockquote class="text-2xl font-light leading-relaxed italic">
+      "{content}"
+    </blockquote>
+    
+    {/* Attribution */}
+    <div class="space-y-2">
+      <div class="text-lg">{author}</div>
+      {source && (
+        <div class="font-mono text-sm text-black/40">
+          source: {source}
+        </div>
+      )}
+    </div>
+
+    {/* Tags as subtle technical references */}
+    <div class="font-mono text-xs text-black/40 pt-4">
+      references: {tags.join(' • ')}
+    </div>
+  </div>
+</div>
+
+<style>
+  .memory-block::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  .memory-block::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+</style>

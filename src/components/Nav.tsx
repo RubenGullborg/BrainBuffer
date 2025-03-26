@@ -37,9 +37,9 @@ export default function Nav() {
 
       {/* Desktop menu */}
       <div className="hidden xl:flex gap-12">
-        <a href="/">L1 </a>
-        <a href="/">L2</a>
-        <a href="/">L3</a>
+        <a href="/L1">L1 </a>
+        <a href="/L2">L2</a>
+        <a href="/L3">L3</a>
       </div>
 
       {/* Hamburger icon */}
@@ -88,9 +88,9 @@ export default function Nav() {
               className="flex flex-col items-center justify-center h-full gap-8 text-2xl"
             >
               {[
-                { text: 'L1 - Letters', href: '/' },
-                { text: 'L2 - Images', href: '/' },
-                { text: 'L3 - Videos', href: '/' }
+                { text: 'L1 - Letters', href: '/L1' },
+                { text: 'L2 - Images', href: '/L2' },
+                { text: 'L3 - Videos', href: '/L3' }
               ].map((item, i) => (
                 <motion.a
                   key={item.text}

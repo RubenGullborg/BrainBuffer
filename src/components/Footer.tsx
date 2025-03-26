@@ -10,7 +10,7 @@ export default function Footer() {
             <h3 className="text-sm font-mono mb-4">MEMORY_ADDR_0x01</h3>
             <p className="text-sm opacity-60">
               BrainBuffer: Neural L1 Cache<br />
-              Stack Frame 2024
+              Stack Frame 2025
             </p>
           </div>
 
@@ -27,7 +27,7 @@ export default function Footer() {
                   key={link.name}
                   href={link.href}
                   className="text-sm opacity-60 hover:opacity-100 transition-opacity"
-                  whileHover={{ x: 4 }}
+                  whileHover={{ x: 4, y: -2 }}
                 >
                   {link.name}
                 </motion.a>

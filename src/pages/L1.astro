@@ -1,0 +1,21 @@
+---
+import MainLayout from "../layouts/main-layout.astro";
+import Quote from "../components/Quote.astro";
+---
+
+<MainLayout title="L1 Cache">
+  <Quote
+    content="The only way to do great work is to love what you do."
+    author="Steve Jobs"
+    source="Stanford Commencement Speech"
+    date="2005-06-12"
+    tags={["inspiration", "work", "passion"]}
+  />
+
+  <Quote
+    content="In computing, cache is a hardware or software component that stores data so that future requests for that data can be served faster."
+    author="Wikipedia"
+    source="Cache (computing)"
+    tags={["computing", "memory", "performance"]}
+  />
+</MainLayout>
