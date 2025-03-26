@@ -4,6 +4,14 @@ import Quote from "../components/Quote.astro";
 import Fragment from "../components/Fragment.astro";
 import Concept from "../components/Concept.astro";
 import ThoughtStream from "../components/ThoughtStream.astro";
+import CodeSnippet from "../components/CodeSnippet.astro";
+import Timeline from "../components/Timeline.astro";
+import Comparison from "../components/Comparison.astro";
+import KeyValue from "../components/KeyValue.astro";
+import InfoCard from "../components/InfoCard.astro";
+import BlockQuote from "../components/BlockQuote.astro";
+import Terminal from "../components/Terminal.astro";
+import Text from "../components/Text.astro";
 ---
 
 <MainLayout title="L1 Cache">
@@ -15,12 +23,12 @@ import ThoughtStream from "../components/ThoughtStream.astro";
     tags={["mentality"]}
   />
 
-  <Quote
-    content="In computing, cache is a hardware or software component that stores data so that future requests for that data can be served faster."
-    author="Wikipedia"
-    source="https://en.wikipedia.org/wiki/Cache_(computing)"
-    tags={["computing", "memory"]}
-  />
+
+  <Text title="L1 Cache">
+    <p class="text-3xl">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+    </p>
+    </Text>
 
   <Fragment
     type="observation"
@@ -41,4 +49,133 @@ import ThoughtStream from "../components/ThoughtStream.astro";
       "Memory is not storage, it's reconstruction",
     ]}
   />
+
+  <CodeSnippet
+    title="Binary Search Algorithm"
+    language="python"
+    code={`def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+            
+    return -1`}
+    notes={[
+      "Time Complexity: O(log n)",
+      "Space Complexity: O(1)",
+      "Requires sorted input array",
+    ]}
+  />
+
+  <Timeline
+    title="LEARNING_PROGRESSION"
+    events={[
+      {
+        timestamp: "2023.01.15",
+        title: "First Encounter with Neural Networks",
+        description:
+          "Initial exposure to the concept through a university lecture on artificial intelligence fundamentals.",
+      },
+      {
+        timestamp: "2023.03.22",
+        title: "Built First Model",
+        description:
+          "Successfully implemented a basic classification model using TensorFlow for image recognition tasks.",
+      },
+      {
+        timestamp: "2023.07.05",
+        title: "Advanced Architectures",
+        description:
+          "Explored transformer architectures and their applications in natural language processing.",
+      },
+    ]}
+  />
+
+  <Comparison
+    titleA="Supervised Learning"
+    titleB="Unsupervised Learning"
+    items={[
+      {
+        aspect: "Training Data",
+        itemA: "Labeled data with inputs and expected outputs",
+        itemB: "Unlabeled data with only inputs",
+      },
+      {
+        aspect: "Objective",
+        itemA: "Predict correct output for given input",
+        itemB: "Find hidden patterns or structures in data",
+      },
+      {
+        aspect: "Applications",
+        itemA: "Classification, regression, forecasting",
+        itemB: "Clustering, dimensionality reduction, anomaly detection",
+      },
+      {
+        aspect: "Evaluation",
+        itemA: "Direct comparison with ground truth",
+        itemB: "Indirect metrics like cohesion and separation",
+      },
+    ]}
+    conclusion="Both approaches have distinct applications depending on data availability and problem structure. Supervised learning excels at specific prediction tasks when labeled data is available, while unsupervised learning enables pattern discovery in unlabeled datasets."
+  />
+
+  <KeyValue
+    title="WEALTH_DISTRIBUTION"
+    items={[
+      {
+        key: "Top 0.1% of Americans",
+        value: 2817436,
+        unit: "$ USD",
+        description: "Average wages of top 0.1 percentile",
+      },
+      {
+        key: "Top 1%",
+        value: 785968,
+        unit: "$ USD",
+        description: "Average wages of top 1 percentile",
+      },
+      {
+        key: "Bottom 90%",
+        value: 40845,
+        unit: "$ USD",
+        description: "Average wages of bottom 90 percent",
+      },
+    ]}
+    source="Economic Policy Institute analysis of Social Security Administration data"
+    sourceUrl="https://www.bankrate.com/investing/income-wealth-top-1-percent/"
+  />
+
+  <InfoCard
+    title="SYSTEM_UPDATE"
+    body="A new update is available for your system. Please restart your application to continue."
+    type="success"
+  />
+
+  <BlockQuote
+    quote="The only way to do great work is to love what you do."
+    author="Steve Jobs"
+    year="2005-06-12"
+    work="Stanford Commencement Speech"
+    importance="secondary"
+  />
+
+  <Terminal
+    commands={[
+      {
+        input: "ls",
+        output: ["file1.txt", "file2.txt", "file3.txt"],
+        explanation: "This is an explanation",
+      },
+    ]},
+    title="Terminal"
+    prompt="user@brainbuffer:~$ "
+  />
+
+      
 </MainLayout>

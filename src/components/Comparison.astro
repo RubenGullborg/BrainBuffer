@@ -1,0 +1,61 @@
+---
+interface ComparisonItem {
+  aspect: string;
+  itemA: string;
+  itemB: string;
+}
+
+interface Props {
+  titleA: string;
+  titleB: string;
+  items: ComparisonItem[];
+  conclusion?: string;
+}
+
+const { titleA, titleB, items, conclusion } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="font-mono space-y-6">
+    <div class="text-xs text-black/40">NEURAL_COMPARISON_ANALYSIS</div>
+
+    <div class="overflow-x-auto">
+      <div class="min-w-[640px] border border-black/5 shadow-sm rounded-sm overflow-hidden">
+        {/* Header row */}
+        <div class="grid grid-cols-3 bg-black/5">
+          <div class="p-3 border-r border-black/5 flex items-center">
+            <div class="w-2 h-2 bg-black/10 rounded-full mr-2"></div>
+            <span class="text-xs text-black/50">PARAMETER</span>
+          </div>
+          <div class="p-3 border-r border-black/5 font-medium text-left">{titleA}</div>
+          <div class="p-3 font-medium text-left">{titleB}</div>
+        </div>
+
+        {/* Comparison rows */}
+        {
+          items.map((item, i) => (
+            <div class={`grid grid-cols-3 ${i % 2 === 0 ? "bg-black/2" : ""}`}>
+              <div class="p-3 border-r border-black/5">{item.aspect}</div>
+              <div class="p-3 border-r border-black/5">{item.itemA}</div>
+              <div class="p-3">{item.itemB}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      conclusion && (
+        <div class="p-4 bg-black/3 border border-black/5 rounded-sm mt-2">
+          <div class="font-medium mb-2 text-xs">ANALYSIS_RESULT:</div>
+          <p class="text-sm text-black/70">{conclusion}</p>
+        </div>
+      )
+    }
+    
+    {/* Mobile notice */}
+    <div class="md:hidden text-xs text-black/50 text-center mt-2">
+      // SCROLL HORIZONTALLY TO VIEW FULL COMPARISON TABLE
+    </div>
+  </div>
+</div>

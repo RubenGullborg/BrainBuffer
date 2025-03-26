@@ -1,0 +1,67 @@
+---
+interface Item {
+  key: string;
+  value: string | number;
+  unit?: string;
+  description?: string;
+}
+
+interface Props {
+  title: string;
+  items: Item[];
+  source?: string;
+  sourceUrl?: string;
+}
+
+const { title, items, source, sourceUrl } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="font-mono space-y-3">
+    <div class="text-xs text-black/40 flex justify-between items-center">
+      <span>SYSTEM_PARAMETERS: {title}</span>
+    </div>
+
+    <div class="space-y-8 mt-6">
+      {
+        items.map((item) => (
+          <div class="border-b border-black/5 pb-4">
+            <div class="flex items-baseline justify-between mb-2">
+              <span class="text-sm font-semibold">{item.key}</span>
+              <div class="text-lg font-mono">
+                <span>{item.value}</span>
+                {item.unit && (
+                  <span class="text-black/50 text-sm ml-1">{item.unit}</span>
+                )}
+              </div>
+            </div>
+            {item.description && (
+              <div class="text-xs text-black/50 font-light italic">
+                {item.description}
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="text-xs text-right text-black/40 pt-2 border-t border-black/5">
+      {
+        source && (
+          <div class="text-xs">
+            data_source:{" "}
+            {sourceUrl ? (
+              <a href={sourceUrl} class="underline hover:text-black/60">
+                {source}
+              </a>
+            ) : (
+              source
+            )}
+          </div>
+        )
+      }
+      <br />
+      // END OF DATASET
+    </div>
+  </div>
+</div>

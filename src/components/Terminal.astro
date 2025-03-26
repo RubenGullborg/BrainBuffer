@@ -1,0 +1,65 @@
+---
+interface Command {
+  input: string;
+  output?: string[];
+  explanation?: string;
+}
+
+interface Props {
+  commands: Command[];
+  prompt?: string;
+  title?: string;
+}
+
+const {
+  commands,
+  prompt = "user@brainbuffer:~$",
+  title = "Terminal",
+} = Astro.props;
+
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div
+    class="font-mono rounded-sm overflow-hidden border border-black/10 shadow-sm"
+  >
+    <div
+      class="bg-black/10 px-4 py-1 text-xs flex items-center justify-between"
+    >
+      <div class="flex items-center gap-2">
+        <span class="flex gap-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-black/20"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-black/20"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-black/20"></span>
+        </span>
+        <span>{title}</span>
+      </div>
+    </div>
+
+    <div class="p-4 bg-black/5 space-y-2">
+      {
+        commands.map((command) => (
+          <div class="space-y-1">
+            <div>
+              <span class="text-black/60">{prompt}</span>
+              <span class="ml-2">{command.input}</span>
+            </div>
+            {command.output &&
+              command.output.map((line) => (
+                <div class="text-black/70 ml-4">{line}</div>
+              ))}
+            {command.explanation && (
+              <div class="mt-1 ml-4 text-xs text-black/50 border-l-2 border-black/10 pl-2 italic">
+                # {command.explanation}
+              </div>
+            )}
+          </div>
+        ))
+      }
+      <div class="flex items-center">
+        <span class="text-black/60">{prompt}</span>
+        <span class="ml-2 animate-pulse">█</span>
+      </div>
+    </div>
+  </div>
+</div>

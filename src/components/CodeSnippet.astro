@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  language?: string;
+  code: string;
+  notes?: string[];
+}
+
+const { title, language = "text", code, notes = [] } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div
+    class="font-mono rounded-sm overflow-hidden border border-black/5 shadow-sm"
+  >
+    <div class="bg-black/5 px-4 py-2 text-xs flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="flex gap-1 mr-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-black/10"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-black/10"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-black/10"></span>
+        </span>
+        <span>{title}</span>
+        {
+          language && (
+            <span class="bg-black/10 px-1 rounded-sm">{language}</span>
+          )
+        }
+      </div>
+      <span>// Algorithm Cache</span>
+    </div>
+
+    <div class="p-4 bg-black/2 overflow-x-auto">
+      <pre class="text-sm leading-relaxed"><code>{code}</code></pre>
+    </div>
+
+    {/* File stats bar */}
+    <div class="bg-black/8 text-black/50 px-4 py-1 text-xs flex justify-between border-t border-black/10">
+      <span>{code.split('\n').length} lines</span>
+      <span>{code.length} bytes</span>
+    </div>
+
+    {
+      notes.length > 0 && (
+        <div class="px-4 py-3 bg-black/3 border-t border-black/5">
+          <div class="text-xs text-black/60 mb-2">/* EXECUTION NOTES */</div>
+          <ul class="text-xs space-y-1">
+            {notes.map((note) => (
+              <li class="flex items-start">
+                <span class="mr-2">-</span>
+                <span>{note}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</div>

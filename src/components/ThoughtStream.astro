@@ -20,12 +20,38 @@ const { thoughts, title = "THOUGHT_STREAM", context } = Astro.props;
       {thoughts.map((thought, index) => (
         <div class="flex items-start">
           <div class="font-mono text-xs mr-3 mt-1 text-black/30">{index + 1}</div>
-          <p class="text-lg font-light glitch-content">{thought}</p>
+          <p class="text-lg font-light" id={`thought-${index}`}>{thought}</p>
         </div>
       ))}
     </div>
   </div>
 </div>
+
+<script>
+  // Random glitch effect on individual thoughts
+  function applyRandomGlitch() {
+    const thoughts = document.querySelectorAll('[id^="thought-"]');
+    if (!thoughts.length) return;
+    
+    // Select a random thought to glitch
+    const randomIndex = Math.floor(Math.random() * thoughts.length);
+    const targetThought = thoughts[randomIndex];
+    
+    // Apply glitch class
+    targetThought.classList.add('glitching');
+    
+    // Remove glitch class after animation completes
+    setTimeout(() => {
+      targetThought.classList.remove('glitching');
+    }, 500);
+    
+    // Schedule next glitch
+    setTimeout(applyRandomGlitch, Math.random() * 5000 + 2000); // Random interval between 2-7 seconds
+  }
+  
+  // Start the glitch cycle
+  setTimeout(applyRandomGlitch, 2000);
+</script>
 
 <style>
   .glitch-text {
@@ -33,24 +59,21 @@ const { thoughts, title = "THOUGHT_STREAM", context } = Astro.props;
     animation: glitch 3s infinite;
   }
   
-  .glitch-content {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .glitch-content:hover {
-    animation: content-glitch 0.8s linear;
+  .glitching {
+    animation: content-glitch 0.5s linear;
   }
   
   @keyframes glitch {
     0% { transform: translate(0) }
     1% { transform: translate(-2px, 1px) }
     2% { transform: translate(0) }
-    95% { transform: translate(0) }
-    96% { transform: translate(1px, -1px) }
-    97% { transform: translate(-1px, 1px) }
-    98% { transform: translate(1px, -1px) }
-    99% { transform: translate(0) }
+    35% { transform: translate(0) }
+    36% { transform: translate(1px, -1px) }
+    37% { transform: translate(0) }
+    70% { transform: translate(0) }
+    71% { transform: translate(-1px, 1px) }
+    72% { transform: translate(1px, -1px) }
+    73% { transform: translate(0) }
     100% { transform: translate(0) }
   }
   

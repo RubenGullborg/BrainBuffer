@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  body: string;
+  type?: "info" | "warning" | "error" | "success";
+  id?: string;
+}
+
+const {
+  title,
+  body,
+  type = "info",
+  id = Math.random().toString(36).slice(2, 8),
+} = Astro.props;
+
+const icons = {
+  info: "!",
+  warning: "⚠",
+  error: "×",
+  success: "✓",
+};
+
+const labels = {
+  info: "SYSTEM_NOTICE",
+  warning: "CAUTION_ALERT",
+  error: "CRITICAL_ERROR",
+  success: "EXECUTION_SUCCESS",
+};
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="font-mono border border-black/5 rounded-sm overflow-hidden">
+    <div class="bg-black/5 px-4 py-2 text-xs flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span
+          class="w-4 h-4 flex items-center justify-center rounded-full bg-black/10"
+        >
+          {icons[type]}
+        </span>
+        <span>{labels[type]}</span>
+      </div>
+      <span>#{id}</span>
+    </div>
+
+    <div class="px-6 py-4">
+      <h3 class="text-lg mb-2">{title}</h3>
+      <p class="text-sm text-black/70 leading-relaxed">{body}</p>
+    </div>
+  </div>
+</div>
