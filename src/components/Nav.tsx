@@ -32,14 +32,14 @@ export default function Nav() {
       </div>
 
       <h1 className="text-lg font-bold xl:pl-40">
-        <a href="/">L1 Cache</a>
+        <a href="/">BrainBuffer</a>
       </h1>
 
       {/* Desktop menu */}
       <div className="hidden xl:flex gap-12">
-        <a href="/">Home </a>
+        <a href="/">L1 </a>
+        <a href="/">L2</a>
         <a href="/">L3</a>
-        <a href="/">Contact </a>
       </div>
 
       {/* Hamburger icon */}
@@ -88,9 +88,9 @@ export default function Nav() {
               className="flex flex-col items-center justify-center h-full gap-8 text-2xl"
             >
               {[
-                { text: 'Home', href: '/' },
-                { text: 'L1 Letter', href: '/' },
-                { text: 'Contact', href: '/' }
+                { text: 'L1 - Letters', href: '/' },
+                { text: 'L2 - Images', href: '/' },
+                { text: 'L3 - Videos', href: '/' }
               ].map((item, i) => (
                 <motion.a
                   key={item.text}
