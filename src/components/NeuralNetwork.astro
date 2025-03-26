@@ -3,13 +3,21 @@ interface Props {
   height?: string;
   particleSpeed?: number;
   nodeSize?: number;
+  lineColor?: string;
+  nodeColor?: string;
 }
 
-const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
+const {
+  height = "100vh",
+  particleSpeed = 0.005,
+  nodeSize = 0.6,
+  lineColor = "rgba(34, 197, 94, 0.1)",
+  nodeColor = "rgba(34, 197, 94, 0.3)",
+} = Astro.props;
 ---
 
 <div class="neural-network-container" style={`height: ${height};`}>
-  <canvas id="neuralNetworkCanvas" class="w-full h-full"></canvas>
+  <canvas id="neuralNetworkCanvas" class="w-full h-full p-4"></canvas>
 </div>
 
 <style>
@@ -20,7 +28,7 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
   }
 </style>
 
-<script define:vars={{ particleSpeed, nodeSize }}>
+<script define:vars={{ particleSpeed, nodeSize, lineColor, nodeColor }}>
   document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("neuralNetworkCanvas");
     if (!canvas) return;
@@ -47,19 +55,19 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
       const width = canvas.offsetWidth;
       const height = canvas.offsetHeight;
 
-      const l1Count = Math.max(8, Math.floor(height / 80));
-      const l2Count = Math.max(6, Math.floor(height / 100));
-      const l3Count = Math.max(4, Math.floor(height / 120));
+      const l1Count = Math.max(4, Math.floor(height / 160));
+      const l2Count = Math.max(3, Math.floor(height / 200));
+      const l3Count = Math.max(2, Math.floor(height / 240));
 
       // Create L1 nodes (left side)
       for (let i = 0; i < l1Count; i++) {
         nodes.push({
           x: width * 0.2,
-          y: height * (0.1 + i * (0.8 / l1Count)),
-          radius: 4 * nodeSize,
-          type: 0, // L1 cache
-          vx: Math.random() * 0.2 - 0.1,
-          vy: Math.random() * 0.2 - 0.1,
+          y: height * (0.2 + i * (0.6 / l1Count)),
+          radius: 3 * nodeSize,
+          type: 0,
+          vx: Math.random() * 0.1 - 0.05,
+          vy: Math.random() * 0.1 - 0.05,
         });
       }
 
@@ -67,11 +75,11 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
       for (let i = 0; i < l2Count; i++) {
         nodes.push({
           x: width * 0.5,
-          y: height * (0.15 + i * (0.7 / l2Count)),
-          radius: 5 * nodeSize,
-          type: 1, // L2 cache
-          vx: Math.random() * 0.2 - 0.1,
-          vy: Math.random() * 0.2 - 0.1,
+          y: height * (0.25 + i * (0.5 / l2Count)),
+          radius: 4 * nodeSize,
+          type: 1,
+          vx: Math.random() * 0.1 - 0.05,
+          vy: Math.random() * 0.1 - 0.05,
         });
       }
 
@@ -79,11 +87,11 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
       for (let i = 0; i < l3Count; i++) {
         nodes.push({
           x: width * 0.8,
-          y: height * (0.2 + i * (0.6 / l3Count)),
-          radius: 6 * nodeSize,
-          type: 2, // L3 cache
-          vx: Math.random() * 0.2 - 0.1,
-          vy: Math.random() * 0.2 - 0.1,
+          y: height * (0.3 + i * (0.4 / l3Count)),
+          radius: 5 * nodeSize,
+          type: 2,
+          vx: Math.random() * 0.1 - 0.05,
+          vy: Math.random() * 0.1 - 0.05,
         });
       }
     };
@@ -96,42 +104,9 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
     let particleTime = 0;
     const particles = [];
 
-    // Track active node
-    let activeNode = null;
-
-    // Mouse position tracking
-    let mouseX = -1000;
-    let mouseY = -1000;
-
-    canvas.addEventListener("mousemove", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    });
-
-    canvas.addEventListener("mouseleave", () => {
-      mouseX = -1000;
-      mouseY = -1000;
-    });
-
     // Animation function
     const animate = () => {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-
-      // Find closest node to mouse
-      let closestDist = Infinity;
-      activeNode = null;
-
-      nodes.forEach((node, index) => {
-        const dx = node.x - mouseX;
-        const dy = node.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < closestDist && dist < 100) {
-          closestDist = dist;
-          activeNode = node.type;
-        }
-      });
 
       // Draw connections between nodes
       ctx.lineWidth = 0.5;
@@ -143,9 +118,14 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
         for (let j = 0; j < nodes.length; j++) {
           if (nodes[j].type !== 1) continue;
 
+          // Statisk mørkere linje med let pulsering for bevægelse
+          const baseOpacity = 0.2; // Højere basisopacitet
+          const pulseAmount = 0.05; // Mindre pulsering
           const opacity =
-            0.05 + (Math.sin(Date.now() / 3000 + i * j) + 1) * 0.05;
-          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+            baseOpacity +
+            (Math.sin(Date.now() / 3000 + i * j) + 1) * pulseAmount;
+
+          ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${opacity})`);
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -160,9 +140,13 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
         for (let j = 0; j < nodes.length; j++) {
           if (nodes[j].type !== 2) continue;
 
+          const baseOpacity = 0.2;
+          const pulseAmount = 0.05;
           const opacity =
-            0.05 + (Math.sin(Date.now() / 2500 + i * j) + 1) * 0.05;
-          ctx.strokeStyle = `rgba(74, 222, 128, ${opacity})`;
+            baseOpacity +
+            (Math.sin(Date.now() / 2500 + i * j) + 1) * pulseAmount;
+
+          ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${opacity})`);
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -210,22 +194,13 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
           node.vx *= -1;
         }
 
-        // Draw node
+        // Draw node with fixed color
         ctx.beginPath();
-
-        // Different colors for different node types
-        if (node.type === 0) {
-          ctx.fillStyle = activeNode === 0 ? "#4ade80" : "#22c55e";
-        } else if (node.type === 1) {
-          ctx.fillStyle = activeNode === 1 ? "#4ade80" : "#22c55e";
-        } else {
-          ctx.fillStyle = activeNode === 2 ? "#4ade80" : "#22c55e";
-        }
-
+        ctx.fillStyle = nodeColor;
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Glow effect
+        // Subtle glow effect (uden hover-effekt)
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(
           node.x,
@@ -235,11 +210,8 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
           node.y,
           node.radius * 4
         );
-        gradient.addColorStop(
-          0,
-          `rgba(74, 222, 128, ${activeNode === node.type ? 0.3 : 0.1})`
-        );
-        gradient.addColorStop(1, "rgba(74, 222, 128, 0)");
+        gradient.addColorStop(0, `rgba(34, 197, 94, 0.15)`);
+        gradient.addColorStop(1, "rgba(34, 197, 94, 0)");
         ctx.fillStyle = gradient;
         ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
         ctx.fill();
@@ -247,7 +219,7 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
 
       // Create new particles occasionally
       particleTime++;
-      if (particleTime > 20) {
+      if (particleTime > 40) {
         particleTime = 0;
 
         // Get L1 nodes
@@ -310,13 +282,13 @@ const { height = "100vh", particleSpeed = 0.01, nodeSize = 1 } = Astro.props;
         particle.y = particle.startY + (particle.endY - particle.startY) * ease;
 
         ctx.beginPath();
-        ctx.fillStyle = "rgba(74, 222, 128, 0.8)";
+        ctx.fillStyle = "rgba(34, 197, 94, 0.8)";
         ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
         ctx.fill();
 
-        // Optional: add particle trail
+        // Particle trail - lidt svagere for at matche det overordnede udtryk
         ctx.beginPath();
-        ctx.fillStyle = "rgba(74, 222, 128, 0.2)";
+        ctx.fillStyle = "rgba(34, 197, 94, 0.2)";
         ctx.arc(particle.x, particle.y, 4, 0, Math.PI * 2);
         ctx.fill();
       }

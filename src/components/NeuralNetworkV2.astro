@@ -1,0 +1,498 @@
+---
+interface Props {
+  height?: string;
+  particleSpeed?: number;
+  nodeSize?: number;
+  lineColor?: string;
+  nodeColor?: string;
+}
+
+const {
+  height = "100vh",
+  particleSpeed = 0.01,
+  nodeSize = 1,
+  lineColor = "rgba(34, 197, 94, 0.2)",
+  nodeColor = "#22c55e",
+} = Astro.props;
+---
+
+<div class="neural-network-container" style={`height: ${height};`}>
+  <canvas id="neuralNetworkCanvas" class="w-full h-full p-4"></canvas>
+
+  <!-- Clynge labels -->
+  <div class="cluster-labels">
+    <div class="cluster-label" style="left: 20%; top: 25%;">L1</div>
+    <div class="cluster-label" style="left: 50%; top: 25%;">L2</div>
+    <div class="cluster-label" style="left: 80%; top: 25%;">L3</div>
+  </div>
+</div>
+
+<style>
+  .neural-network-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cluster-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .cluster-label {
+    position: absolute;
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: rgba(34, 197, 94, 0.4);
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+  }
+</style>
+
+<script define:vars={{ particleSpeed, nodeSize, lineColor, nodeColor }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("neuralNetworkCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Neural network nodes
+    const nodes = [];
+
+    // Create nodes med en mere spredt distribution
+    const createNodes = () => {
+      nodes.length = 0;
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+
+      // Mere tilfældig fordeling inden for hvert cluster
+      const addNodesInCluster = (
+        centerX,
+        centerY,
+        radius,
+        count,
+        type,
+        sizeRange
+      ) => {
+        for (let i = 0; i < count; i++) {
+          // Tilfældig vinkel og afstand fra center
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.random() * radius;
+
+          // Tilføj lidt variation til positionen
+          const x = centerX + Math.cos(angle) * distance;
+          const y = centerY + Math.sin(angle) * distance;
+
+          // Tilfældig størrelse inden for området
+          const nodeRadius =
+            (sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0])) *
+            nodeSize;
+
+          nodes.push({
+            x,
+            y,
+            radius: nodeRadius,
+            type,
+            vx: (Math.random() - 0.5) * 0.1,
+            vy: (Math.random() - 0.5) * 0.1,
+            clusterCenter: { x: centerX, y: centerY },
+            pulsePhase: Math.random() * Math.PI * 2, // Tilfældig startfase til pulsering
+            lastDataEmit: 0, // Tidspunkt for sidste dataudsendelse
+            dataEmitInterval: 3000 + Math.random() * 7000, // Tilfældig interval mellem 3-10 sekunder
+            active: false, // Om noden er aktiv (sender data)
+          });
+        }
+      };
+
+      // L1 cluster (venstre side)
+      const l1Count = Math.max(6, Math.min(10, Math.floor(height / 100)));
+      addNodesInCluster(
+        width * 0.2,
+        height * 0.5,
+        width * 0.15,
+        l1Count,
+        0,
+        [3, 5]
+      );
+
+      // L2 cluster (midten)
+      const l2Count = Math.max(5, Math.min(8, Math.floor(height / 120)));
+      addNodesInCluster(
+        width * 0.5,
+        height * 0.5,
+        width * 0.15,
+        l2Count,
+        1,
+        [4, 6]
+      );
+
+      // L3 cluster (højre side)
+      const l3Count = Math.max(4, Math.min(7, Math.floor(height / 140)));
+      addNodesInCluster(
+        width * 0.8,
+        height * 0.5,
+        width * 0.15,
+        l3Count,
+        2,
+        [5, 7]
+      );
+    };
+
+    createNodes();
+    window.addEventListener("resize", createNodes);
+
+    // Animation variables
+    let animationFrameId;
+    let particleTime = 0;
+    const particles = [];
+
+    // Data pakker til visualisering
+    const dataPackets = [
+      { text: "01001", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "10110", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "11001", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "00101", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "FF", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "A7", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "D3", color: "rgba(34, 197, 94, 0.8)" },
+      { text: "2F", color: "rgba(34, 197, 94, 0.8)" },
+    ];
+
+    // Data bobler, der udsendes fra tilfældige noder
+    const dataBubbles = [];
+
+    // Animation function
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const currentTime = Date.now();
+
+      // Draw connections between nodes
+      ctx.lineWidth = 0.5;
+
+      // L1 to L2 connections
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].type !== 0) continue;
+
+        for (let j = 0; j < nodes.length; j++) {
+          if (nodes[j].type !== 1) continue;
+
+          // Kun forbind hvis afstanden er rimelig
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const maxDistance = canvas.width * 0.4;
+
+          if (distance > maxDistance) continue;
+
+          // Statisk mørkere linje med let pulsering
+          const baseOpacity = 0.15;
+          const pulseAmount = 0.05;
+          const opacity =
+            baseOpacity +
+            (Math.sin(Date.now() / 3000 + i * j) + 1) * pulseAmount;
+
+          ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${opacity})`);
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // L2 to L3 connections
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].type !== 1) continue;
+
+        for (let j = 0; j < nodes.length; j++) {
+          if (nodes[j].type !== 2) continue;
+
+          // Kun forbind hvis afstanden er rimelig
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const maxDistance = canvas.width * 0.4;
+
+          if (distance > maxDistance) continue;
+
+          const baseOpacity = 0.15;
+          const pulseAmount = 0.05;
+          const opacity =
+            baseOpacity +
+            (Math.sin(Date.now() / 2500 + i * j) + 1) * pulseAmount;
+
+          ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${opacity})`);
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // Update and draw nodes
+      nodes.forEach((node, index) => {
+        // Bevægelse - langsommere og mere kontrolleret
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Tilføj let tiltrækning til cluster centeret
+        const pullFactor = 0.0005;
+        node.vx += (node.clusterCenter.x - node.x) * pullFactor;
+        node.vy += (node.clusterCenter.y - node.y) * pullFactor;
+
+        // Boundary check
+        if (node.x < node.radius || node.x > canvas.offsetWidth - node.radius) {
+          node.vx *= -0.8;
+        }
+        if (
+          node.y < node.radius ||
+          node.y > canvas.offsetHeight - node.radius
+        ) {
+          node.vy *= -0.8;
+        }
+
+        // Tilfældigt skift i hastighed med lav sandsynlighed
+        if (Math.random() < 0.01) {
+          node.vx = (Math.random() - 0.5) * 0.1;
+          node.vy = (Math.random() - 0.5) * 0.1;
+        }
+
+        // Tjek om noden skal sende data
+        if (currentTime - node.lastDataEmit > node.dataEmitInterval) {
+          node.active = true;
+          node.lastDataEmit = currentTime;
+
+          // Vælg en tilfældig modtager fra næste lag
+          const nextLayerNodes = nodes.filter((n) => n.type === node.type + 1);
+          if (nextLayerNodes.length > 0) {
+            const targetNode =
+              nextLayerNodes[Math.floor(Math.random() * nextLayerNodes.length)];
+
+            // Opret en ny datapartikel
+            const dataPacket =
+              dataPackets[Math.floor(Math.random() * dataPackets.length)];
+            particles.push({
+              x: node.x,
+              y: node.y,
+              progress: 0,
+              startX: node.x,
+              startY: node.y,
+              endX: targetNode.x,
+              endY: targetNode.y,
+              type: node.type,
+              data: dataPacket.text,
+              color: dataPacket.color,
+            });
+
+            // Opret en dataudvidelsesbobble
+            dataBubbles.push({
+              x: node.x,
+              y: node.y,
+              maxRadius: node.radius * 3,
+              currentRadius: 0,
+              alpha: 0.7,
+              node: node,
+              data: dataPacket.text,
+            });
+          }
+
+          // Nulstil interval
+          node.dataEmitInterval = 3000 + Math.random() * 7000;
+        }
+
+        // Gradvist deaktiver noden
+        if (node.active && Math.random() < 0.02) {
+          node.active = false;
+        }
+
+        // Draw node
+        const pulseSize = node.active
+          ? Math.sin(Date.now() / 200 + node.pulsePhase) * 0.2 + 1
+          : 1;
+
+        ctx.beginPath();
+        ctx.fillStyle = node.active ? "#4ade80" : nodeColor;
+        ctx.arc(node.x, node.y, node.radius * pulseSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow effect
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          node.x,
+          node.y,
+          node.radius,
+          node.x,
+          node.y,
+          node.radius * 4
+        );
+        const glowIntensity = node.active ? 0.3 : 0.15;
+        gradient.addColorStop(0, `rgba(34, 197, 94, ${glowIntensity})`);
+        gradient.addColorStop(1, "rgba(34, 197, 94, 0)");
+        ctx.fillStyle = gradient;
+        ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Opdater og tegn databoblerne
+      for (let i = dataBubbles.length - 1; i >= 0; i--) {
+        const bubble = dataBubbles[i];
+        bubble.currentRadius += 1;
+        bubble.alpha -= 0.02;
+
+        if (bubble.alpha <= 0 || bubble.currentRadius >= bubble.maxRadius) {
+          dataBubbles.splice(i, 1);
+          continue;
+        }
+
+        // Tegn databoblen
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(34, 197, 94, ${bubble.alpha})`;
+        ctx.lineWidth = 1;
+        ctx.arc(bubble.x, bubble.y, bubble.currentRadius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Skriv datainformation
+        if (
+          bubble.currentRadius > bubble.maxRadius * 0.3 &&
+          bubble.alpha > 0.5
+        ) {
+          ctx.font = "9px monospace";
+          ctx.fillStyle = `rgba(34, 197, 94, ${bubble.alpha})`;
+          ctx.fillText(
+            bubble.data,
+            bubble.x - bubble.data.length * 2.5,
+            bubble.y
+          );
+        }
+      }
+
+      // Create new particles occasionally from random nodes
+      particleTime++;
+      if (particleTime > 30) {
+        particleTime = 0;
+
+        // Få alle L1 og L2 noder
+        const l1Nodes = nodes.filter((node) => node.type === 0);
+        const l2Nodes = nodes.filter((node) => node.type === 1);
+
+        // Vælg tilfældige noder til at udsende partikler
+        if (l1Nodes.length && l2Nodes.length && Math.random() < 0.3) {
+          const sourceIndex = Math.floor(Math.random() * l1Nodes.length);
+          const targetIndex = Math.floor(Math.random() * l2Nodes.length);
+
+          // Vælg en tilfældig datatype
+          const dataIndex = Math.floor(Math.random() * dataPackets.length);
+
+          particles.push({
+            x: l1Nodes[sourceIndex].x,
+            y: l1Nodes[sourceIndex].y,
+            progress: 0,
+            startX: l1Nodes[sourceIndex].x,
+            startY: l1Nodes[sourceIndex].y,
+            endX: l2Nodes[targetIndex].x,
+            endY: l2Nodes[targetIndex].y,
+            type: 0,
+            data: dataPackets[dataIndex].text,
+            color: dataPackets[dataIndex].color,
+          });
+        }
+
+        // L2 til L3 partikler
+        const l3Nodes = nodes.filter((node) => node.type === 2);
+        if (l2Nodes.length && l3Nodes.length && Math.random() < 0.3) {
+          const sourceIndex = Math.floor(Math.random() * l2Nodes.length);
+          const targetIndex = Math.floor(Math.random() * l3Nodes.length);
+
+          // Vælg en tilfældig datatype
+          const dataIndex = Math.floor(Math.random() * dataPackets.length);
+
+          particles.push({
+            x: l2Nodes[sourceIndex].x,
+            y: l2Nodes[sourceIndex].y,
+            progress: 0,
+            startX: l2Nodes[sourceIndex].x,
+            startY: l2Nodes[sourceIndex].y,
+            endX: l3Nodes[targetIndex].x,
+            endY: l3Nodes[targetIndex].y,
+            type: 1,
+            data: dataPackets[dataIndex].text,
+            color: dataPackets[dataIndex].color,
+          });
+        }
+      }
+
+      // Update and draw particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const particle = particles[i];
+        particle.progress += particleSpeed;
+
+        if (particle.progress >= 1) {
+          // Når en partikel når sit mål, aktiver målnoden
+          const targetNodes = nodes.filter(
+            (n) =>
+              Math.abs(n.x - particle.endX) < 10 &&
+              Math.abs(n.y - particle.endY) < 10
+          );
+          if (targetNodes.length > 0) {
+            targetNodes[0].active = true;
+            targetNodes[0].lastDataEmit = currentTime;
+          }
+
+          particles.splice(i, 1);
+          continue;
+        }
+
+        // Apply easing for more natural movement
+        const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+        const ease = easeInOut(particle.progress);
+
+        particle.x = particle.startX + (particle.endX - particle.startX) * ease;
+        particle.y = particle.startY + (particle.endY - particle.startY) * ease;
+
+        // Tegn partiklen
+        ctx.beginPath();
+        ctx.fillStyle = particle.color || "rgba(34, 197, 94, 0.8)";
+        ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tegn partiklens hale
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(34, 197, 94, 0.2)";
+        ctx.arc(particle.x, particle.y, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Vis dataindhold
+        if (particle.data) {
+          ctx.font = "8px monospace";
+          ctx.fillStyle = "rgba(34, 197, 94, 0.8)";
+          ctx.fillText(particle.data, particle.x + 5, particle.y - 3);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", createNodes);
+      cancelAnimationFrame(animationFrameId);
+    };
+  });
+</script>
