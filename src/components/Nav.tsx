@@ -10,14 +10,14 @@ export default function Nav() {
   return (
     <nav className="relative mx-8 mb-24 flex justify-between items-center pt-12 pb-6 font-medium md:mx-16 lg:mx-32">
       <svg
-        className="absolute bottom-0 -translate-x-1/2 left-1/2"
-        width="350"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full"
         height={4}
-        viewBox="0 0 250 4"
+        viewBox="0 0 1250 4"
         fill="none"
+        preserveAspectRatio="none"
       >
         <path
-          d="M2 2L428 2"
+          d="M2 2L1248 2"
           strokeWidth={2}
           stroke="#282828"
           strokeLinecap="round"
@@ -35,7 +35,8 @@ export default function Nav() {
         <a href="/">L1 Cache</a>
       </h1>
 
-      <div className="flex gap-12 max-xl:hidden">
+      {/* Desktop menu */}
+      <div className="hidden xl:flex gap-12">
         <a href="/">Home </a>
         <a href="/">L1 Letter</a>
         <a href="/">L2 Image</a>
@@ -43,11 +44,9 @@ export default function Nav() {
         <a href="/">Contact </a>
       </div>
 
+      {/* Hamburger icon */}
       <div
-        onClick={() => {
-          setToggled((prevToggle) => !prevToggle);
-          console.log(!toggled); // Tjekker den nye værdi
-        }}
+        onClick={() => setToggled(!toggled)}
         className="space-y-1 cursor-pointer xl:hidden"
       >
         <span className="block h-0.5 w-8 bg-black"></span>
@@ -55,13 +54,18 @@ export default function Nav() {
         <span className="block h-0.5 w-4 bg-black"></span>
       </div>
 
-      {/* Toggle this later for mobile menu  <div className="flex gap-12">
-          <a href="/">Home </a>
-          <a href="/">L1 Letter</a>
-          <a href="/">L2 Image</a>
-          <a href="/">L3 Video</a>
-          <a href="/">Contact </a>
-        </div> */}
+      {/* Mobile menu */}
+      {toggled && (
+        <div className="absolute top-full right-0 w-48 py-4 px-6 bg-white shadow-lg rounded-lg xl:hidden">
+          <div className="flex flex-col gap-4">
+            <a href="/">Home </a>
+            <a href="/">L1 Letter</a>
+            <a href="/">L2 Image</a>
+            <a href="/">L3 Video</a>
+            <a href="/">Contact </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
