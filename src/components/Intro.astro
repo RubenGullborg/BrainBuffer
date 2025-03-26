@@ -5,37 +5,55 @@ import Akira from "../assets/akira.jpg";
 
 <div class="relative mx-12 flex flex-col items-center justify-center">
   <h1 class="text-5xl text-left">
-    Welcome to all the <span class="font-bold">cached inspiration</span> of my mind
+    Welcome to my <span class="font-bold">neural cache </span> architecture
   </h1>
 
   <div class="relative my-16">
     <p class="p-4 text-lg text-left max-w-4xl">
-      Welcome to <span class="font-bold text-primary">L1 Cache</span>. This is meant as an
-      ever-expanding collection of artifacts that spark creativity and
-      imagination in my mind. I've formed this blog like a well-tuned cache memory, to stores and serve bits of
-      inspiration in its purest form, be it letters, pictures, videos, or anything else.
+      This is my <span class="font-bold text-primary"
+        >Brainbuffer - Neural L1 Cache.</span
+      >A place where my synaptic connections meets modern digital architecture.
+      Here i want to collect all the things that fuels the inspiration,
+      motivation and imagination in my mind.
       <br /><br />
-      Scroll through an endless stream of media – each which has ignited a creative spark in me, and hopefully will do the same for you.
+      I've formed this blog like a well-tuned cache memory, to stores and serve bits
+      of inspiration in its purest form, be it letters, images, videos, or anything
+      else. In other word this is my mind's L1 cache – the fastest, most immediate
+      access to the creative packets stored in my brain.
       <br /><br />
-      No algorithms, no restrictions, just pure, unfiltered inspiration flowing from my mind to your screen. 
-      Dive deep and let your mind wander through this digital constellation of a random access memory.
+      Scroll through an endless stream of media – each which has ignited a creative
+      spark in me, and hopefully will do the same for you. <br /><br />Like a
+      CPU's cache hierarchy, this space is optimized for rapid-access: <span
+        class="font-bold"
+        >L1
+      </span>contains immediate thoughts [text], <span class="font-bold"
+        >L2
+      </span>holds visual memory blocks [images], and <span class="font-bold"
+        >L3
+      </span>stores larger sequential data [videos]. <br /><br />Each memory
+      block is cached here the moment it triggers a creative interrupt in on of
+      my many thought threads.
+      <br /><br />
+      No algorithms, no restrictions, just pure, unfiltered inspiration flowing from
+      my mind to your screen. Dive deep and let your mind wander through this digital
+      constellation of these random access memory.
     </p>
   </div>
 
   <div
-    class="flex justify-center pb-12 text-center text-main text-content xl:gap-16"
+    class="flex justify-center pb-12 text-center text-main text-content sm:gap-16"
   >
     <div class="w-40">
-      <h2 class="text-xl">Computed</h2>
-      <p id="art-counter" class="text-3xl font-bold">85</p>
+      <h2 class="text-xl">Clock Cycles</h2>
+      <p id="clockcycles-counter" class="text-3xl font-bold font-mono">24</p>
+    </div>
+    <div class="w-40">
+      <h2 class="text-xl line-through">Stack limit</h2>
+      <p id="" class="text-3xl font-bold font-mono">Undefined</p>
     </div>
     <div class="w-40">
       <h2 class="text-xl">Memory space</h2>
-      <p id="youtube-counter" class="text-3xl font-bold">396</p>
-    </div>
-    <div class="w-40">
-      <h2 class="text-xl line-through">Buffer size</h2>
-      <p id="" class="text-2xl font-thin">Undefined</p>
+      <p id="memoryspace-counter" class="text-3xl font-bold font-mono">25</p>
     </div>
   </div>
 
@@ -65,7 +83,6 @@ import Akira from "../assets/akira.jpg";
       );
     }
   }
-  incrementCounter("art-counter", 0, 248, 1000);
-  incrementCounter("youtube-counter", 0, 396, 1000, "mb");
-  incrementCounter("reviews-counter", 0, 124, 1000);
+  incrementCounter("clockcycles-counter", 0, 24, 1000, " hours");
+  incrementCounter("memoryspace-counter", 0, 25, 1000, " mil gb");
 </script>
