@@ -1,17 +1,66 @@
 ---
 interface Props {
-  videoId?: string; // YouTube video ID
-  url?: string; // Direct video URL
+  videoId?: string;
+  url?: string;
   title: string;
   description?: string;
-  type?: "youtube" | "url";
+  startTime?: number | string; // Kan være sekunder eller "1h2m3s" format
 }
 
-const { videoId, url, title, description, type = "youtube" } = Astro.props;
+const { videoId: propsVideoId, url, title, description, startTime } = Astro.props;
 
-// Hjælpefunktion til at få YouTube thumbnail
-const getYouTubeThumbnail = (id: string) =>
-  `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+// Funktion til at udtrække video ID og starttid fra YouTube URL
+function getYouTubeInfo(url: string) {
+  // Match video ID
+  const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url?.match(regExp);
+  const videoId = match && match[2].length === 11 ? match[2] : null;
+
+  // Match starttid fra URL (t parameter)
+  const timeRegExp = /[?&]t=([^&#]*)/;
+  const timeMatch = url?.match(timeRegExp);
+  let startSeconds = 0;
+
+  if (timeMatch && timeMatch[1]) {
+    // Håndter forskellige tidsformater (123s, 1h2m3s, eller bare sekunder)
+    const time = timeMatch[1];
+    if (time.includes('h') || time.includes('m') || time.includes('s')) {
+      const hours = time.match(/(\d+)h/) ? parseInt(time.match(/(\d+)h/)[1]) * 3600 : 0;
+      const minutes = time.match(/(\d+)m/) ? parseInt(time.match(/(\d+)m/)[1]) * 60 : 0;
+      const seconds = time.match(/(\d+)s/) ? parseInt(time.match(/(\d+)s/)[1]) : 0;
+      startSeconds = hours + minutes + seconds;
+    } else {
+      startSeconds = parseInt(time);
+    }
+  }
+
+  return { videoId, startSeconds };
+}
+
+// Konverter startTime prop til sekunder hvis det er angivet som string
+function parseStartTime(time?: string | number): number {
+  if (!time) return 0;
+  if (typeof time === 'number') return time;
+  
+  const hours = time.match(/(\d+)h/) ? parseInt(time.match(/(\d+)h/)[1]) * 3600 : 0;
+  const minutes = time.match(/(\d+)m/) ? parseInt(time.match(/(\d+)m/)[1]) * 60 : 0;
+  const seconds = time.match(/(\d+)s/) ? parseInt(time.match(/(\d+)s/)[1]) : 0;
+  
+  return hours + minutes + seconds;
+}
+
+let videoInfo = { videoId: propsVideoId, startSeconds: parseStartTime(startTime) };
+
+if (url) {
+  videoInfo = getYouTubeInfo(url);
+}
+
+if (!videoInfo.videoId) {
+  throw new Error('Enten videoId eller en gyldig YouTube URL skal angives');
+}
+
+// Get thumbnail URL
+const thumbnailUrl = `https://i.ytimg.com/vi/${videoInfo.videoId}/maxresdefault.jpg`;
 ---
 
 <div class="my-32 mx-auto max-w-6xl px-8">
@@ -20,38 +69,96 @@ const getYouTubeThumbnail = (id: string) =>
       <span>VIDEO_ANALYSIS: {title}</span>
     </div>
 
-    <div class="border border-black/10 overflow-hidden">
-      {
-        type === "youtube" && videoId && (
-          <div class="relative aspect-video w-full">
-            <iframe
-              src={`https://www.youtube.com/embed/${videoId}`}
-              title={title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="absolute top-0 left-0 w-full h-full"
-            />
+    <div class="border border-black/10 overflow-hidden rounded-lg">
+      <div
+        class="video-container relative aspect-video w-full bg-black cursor-pointer"
+        data-video-id={videoInfo.videoId}
+        data-start-time={videoInfo.startSeconds}
+      >
+        <!-- Thumbnail og play button -->
+        <div class="thumbnail-overlay">
+          <img
+            src={thumbnailUrl}
+            alt={title}
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <button
+              class="play-button bg-black/70 hover:bg-black/90 text-white w-16 h-16 rounded-full flex items-center justify-center transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </button>
           </div>
-        )
-      }
-
-      {
-        type === "url" && url && (
-          <video class="w-full aspect-video" controls preload="metadata">
-            <source src={url} type="video/mp4" />
-            Din browser understøtter ikke video-elementet.
-          </video>
-        )
-      }
+        </div>
+      </div>
     </div>
 
     {
       description && (
         <div class="flex flex-col gap-2">
-          <h3 class="text-xl font-light font-mono">{title}</h3>
-          <p class="text-sm text-black/70 font-mono">{description}</p>
+          <h3 class="text-xl font-light">{title}</h3>
+          <p class="text-sm text-black/70">{description}</p>
         </div>
       )
     }
   </div>
 </div>
+
+<script>
+  function initVideoContainers() {
+    document.querySelectorAll(".video-container").forEach((container) => {
+      container.addEventListener("click", function () {
+        const videoId = this.dataset.videoId;
+        const startTime = this.dataset.startTime || '0';
+        const iframe = document.createElement("iframe");
+
+        iframe.setAttribute(
+          "src",
+          `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&start=${startTime}`
+        );
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute(
+          "allow",
+          "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        );
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.classList.add("absolute", "top-0", "left-0", "w-full", "h-full");
+
+        this.innerHTML = "";
+        this.appendChild(iframe);
+      });
+    });
+  }
+
+  // Initialize on page load
+  initVideoContainers();
+
+  // Initialize on view transitions
+  document.addEventListener("astro:page-load", initVideoContainers);
+</script>
+
+<style>
+  .thumbnail-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .play-button {
+    transition: transform 0.2s ease;
+  }
+
+  .video-container:hover .play-button {
+    transform: scale(1.1);
+  }
+</style>
