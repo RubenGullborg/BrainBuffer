@@ -1,5 +1,5 @@
 import { Image } from "astro:assets";
-import Avatar from "../Assets/Avatar.jpg";
+import Avatar from "../../Assets/Avatar.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 

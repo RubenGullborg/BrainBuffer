@@ -9,7 +9,8 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-mono mb-4">MEMORY_ADDR_0x01</h3>
             <p className="text-sm opacity-60">
-              BrainBuffer: Neural L1 Cache<br />
+              BrainBuffer: Neural L1 Cache
+              <br />
               Stack Frame 2025
             </p>
           </div>
@@ -21,7 +22,7 @@ export default function Footer() {
               {[
                 { name: "Core Dump", href: "/about" },
                 { name: "Neural Index", href: "/blog" },
-                { name: "Ping Author", href: "/contact" },
+                { name: "Ping Author", href: "https://x.com/RubenGullborg" },
               ].map((link) => (
                 <motion.a
                   key={link.name}
@@ -39,8 +40,10 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-mono mb-4">STATUS_REG</h3>
             <p className="text-sm opacity-60 font-mono">
-              CACHE_STATUS: ACTIVE<br />
-              BUFFER: ACCEPTING_INPUT<br />
+              CACHE_STATUS: ACTIVE
+              <br />
+              BUFFER: ACCEPTING_INPUT
+              <br />
               MEMORY_LEAK: INTENTIONAL
             </p>
           </div>

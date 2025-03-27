@@ -1,0 +1,110 @@
+---
+import MainLayout from "../layouts/main-layout.astro";
+---
+
+<MainLayout title="404 - Kernel Panic">
+  <div class="my-32 mx-auto max-w-4xl px-8">
+    <div class="space-y-6">
+      <div class="font-mono text-sm text-red-600 animate-pulse">
+        ERROR_CODE: 0x00000404
+      </div>
+
+      <h1
+        class="text-4xl font-mono font-bold uppercase tracking-tight glitch-text"
+      >
+        KERNEL PANIC
+      </h1>
+
+      <div class="border border-red-600/60 bg-red-50 p-6 font-mono text-sm">
+        <p class="mb-4 text-red-800">
+          A fatal memory exception has occurred at address 0xF00D:0x04D4
+        </p>
+        <p class="mb-4">
+          The requested neural pathway could not be located in the BrainBuffer
+          memory stack.
+        </p>
+        <pre
+          class="bg-black/5 p-4 overflow-x-auto text-xs">
+EXCEPTION_NO_ROUTE_FOUND
+DUMP_STACK_TRACE:
+  at Memory.allocate (brainbuffer.js:404)
+  at Route.resolve (/neural/routes.js:42)
+  at Router.navigate (/sys/router.js:237)
+  at Document.renderPath (/core/render.js:156)
+  at Browser.request (client.js:89)
+        </pre>
+
+        <div class="mt-6 flex gap-4">
+          <a
+            href="/"
+            class="px-4 py-2 bg-black text-white hover:bg-black/80 transition-colors"
+          >
+            Return to Buffer
+          </a>
+          <button
+            class="px-4 py-2 border border-black hover:bg-black/5 transition-colors"
+            onclick="history.back()"
+          >
+            Restore Last State
+          </button>
+        </div>
+      </div>
+
+    
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .glitch-text {
+    position: relative;
+    animation: glitch 1s infinite;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: "KERNEL PANIC";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    color: cyan;
+    animation: glitch 1.5s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, -2px);
+    opacity: 0.8;
+  }
+
+  .glitch-text::after {
+    color: magenta;
+    animation: glitch 2s infinite;
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+    opacity: 0.8;
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+</style>
