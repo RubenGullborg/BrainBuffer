@@ -21,7 +21,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               {[
                 { name: "Core Dump", href: "/about" },
-                { name: "Neural Index", href: "/blog" },
+                { name: "Neural Index", href: "/L4" },
                 { name: "Ping Author", href: "https://x.com/RubenGullborg" },
               ].map((link) => (
                 <motion.a

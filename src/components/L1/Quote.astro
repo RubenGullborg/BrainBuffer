@@ -1,7 +1,7 @@
 ---
 interface Props {
   content: string;
-  author: string;
+  author?: string;
   source?: string;
   date?: string;
   tags?: string[];
@@ -19,24 +19,28 @@ const { content, author, source, date, tags = [] } = Astro.props;
     </div>
 
     {/* Quote Content */}
-    <blockquote class="text-2xl font-light leading-relaxed italic">
+    <blockquote class="text-2xl font-light leading-relaxed italic ">
       "{content}"
     </blockquote>
     
-    {/* Attribution */}
-    <div class="space-y-2">
-      <div class="text-lg">{author}</div>
-      {source && (
-        <div class="font-mono text-sm text-black/40">
-          source: {source}
-        </div>
-      )}
-    </div>
+    {/* Attribution - kun vist hvis author findes */}
+    {author && (
+      <div class="space-y-2">
+        <div class="text-lg">{author}</div>
+        {source && (
+          <div class="font-mono text-sm text-black/40">
+            source: {source}
+          </div>
+        )}
+      </div>
+    )}
 
     {/* Tags as subtle technical references */}
-    <div class="font-mono text-xs text-black/40 pt-4">
-      references: {tags.join(' • ')}
-    </div>
+    {tags.length > 0 && (
+      <div class="font-mono text-xs text-black/40 pt-4">
+        references: {tags.join(' • ')}
+      </div>
+    )}
   </div>
 </div>
 

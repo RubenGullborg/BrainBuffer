@@ -1,0 +1,167 @@
+---
+import MainLayout from "../layouts/main-layout.astro";
+import Quote from "../components/L1/Quote.astro";
+---
+
+<MainLayout title="Core Dump | About">
+  <div class="my-32 mx-auto max-w-4xl px-8">
+    <div class="space-y-12">
+      <div>
+        <div class="font-mono text-sm text-black/40 mb-4">
+          <span>CORE_DUMP</span>
+        </div>
+
+        <h1 class="text-4xl font-light font-mono">Ruben Gullborg</h1>
+        <p class="text-lg text-black/60 mt-2 font-mono">
+          Upcoming Software Engineer
+        </p>
+      </div>
+
+      <div class="py-12">
+        <p class="text-lg text-black/80 leading-relaxed font-mono">
+          I now navigate this digital frontier of technology that is supposed to
+          empower rather than constrain. <br /> I believe technology should serve
+          as building blocks for creativity and collaboration.
+          <br />
+          <br /> I champion open-source solutions, community-driven projects, and
+          tools that give users true freedom, not vendor lock-in.
+          <br /> This approach creates a competitive landscape where quality and
+          creativity determine success, not market dominance. <br />
+          <br />
+        </p>
+        <p class="text-lg text-black/80 leading-relaxed mt-4 font-mono">
+          Studying Software Engineering at Aarhus University opened my eyes to
+          the power of education. I see firsthand how learning transforms
+          people, and how those people go on to change the world. <br />
+          <br />
+          Universities aren't just about getting jobs - they're about growing as
+          individuals and advancing human knowledge together. <br />
+          <br />
+          When we invest in education, we invest in our collective future and potential
+          as a species.
+        </p>
+      </div>
+
+      <Quote
+        content="I believe in simplicity — clear, minimal, and intentional. Creativity thrives when we focus on what truly matters: quality, beauty, and the small, deliberate details."
+      />
+
+      <div class="py-12">
+        <p class="text-lg text-black/80 leading-relaxed font-mono">
+          I reject the notion that corporate interests should dictate the
+          trajectory of human progress. Too often, the relentless pursuit of
+          profit hinders the fundamental needs and aspirations of individuals. <br
+          />
+          <br />
+          My stance isn't against commerce itself, but against systems that reduce
+          people to metrics and creativity to commodities. <br />
+          <br />
+          I envision a world where markets serve as genuine platforms for innovation
+          and exchange, fostering fair competition rather than entrenching privilege.
+          <br />
+          <br />
+        </p>
+        <p class="text-lg text-black/80 leading-relaxed mt-4 font-mono">
+          My worldview is anchored in <span class="font-bold">Stoic</span> principles
+          and <span class="font-bold">Christian</span> values. <br />
+          <br />
+          I find strength in accepting what I cannot change and taking responsibility
+          for what I can. <br />
+          <br />
+          I believe in the dignity of every individual and our collective capacity
+          for growth through adversity. <br />
+          <br />
+          This serves as the foundation of my approach to both technology and life: Pursuing
+          excellence, chasing virtue, embracing simplicity, holding firm to my principles,
+          and serving something greater than mere self-interest.
+        </p>
+      </div>
+
+      <div class="py-4">
+        <div class="font-mono text-xs text-black/40 mb-4">
+          <span>TECHNOLOGY</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="border border-black/10 p-4 rounded-lg">
+            <h3 class="font-mono text-sm mb-2">LANGUAGES</h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                [
+                  "JavaScript",
+                  "TypeScript",
+                  "HTML5",
+                  "CSS",
+                  "Python",
+                  "C#",
+                  "C++",
+                ].map((tech) => (
+                  <span class="bg-black/5 px-2 py-1 text-xs rounded">
+                    {tech}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="border border-black/10 p-4 rounded-lg">
+            <h3 class="font-mono text-sm mb-2">TOOLS</h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                ["Next.js", "React", "Vue", ".NET", "TailwindCSS"].map(
+                  (tech) => (
+                    <span class="bg-black/5 px-2 py-1 text-xs rounded">
+                      {tech}
+                    </span>
+                  )
+                )
+              }
+            </div>
+          </div>
+
+          <div class="border border-black/10 p-4 rounded-lg">
+            <h3 class="font-mono text-sm mb-2">INTERESTS</h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                ["Web Development", "Design", "Animation", "Simplicity"].map(
+                  (interest) => (
+                    <span class="bg-black/5 px-2 py-1 text-xs rounded">
+                      {interest}
+                    </span>
+                  )
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border border-black/10 p-6 rounded-lg bg-black/5">
+        <p class="font-mono text-sm">
+          <span class="text-black/60">/* Currently working on: */</span><br />
+          Sectify UI — A community-driven UI library focused on entire sections.<br
+          />
+          BrainBuffer — This experimental digital memory space.<br />
+          Rubengullb.org — My personal portfolio site.<br />
+          <br />
+          <span class="text-black/60">/* Future projects: */</span><br />
+          Eli5Dev - Classified<br />
+          TechMap - Classified<br />
+        </p>
+      </div>
+
+      <div class="border-t border-black/10 pt-8">
+        <div class="font-mono text-xs opacity-30 flex items-center gap-2">
+          <span class="bg-black/5 px-2 py-0.5 rounded-sm">PGP FINGERPRINT</span>
+          <span>4B:2D:8A:E1:F7:90:51:D3:5E:C2:17:A0:B6:4F:12:9D</span>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <p class="text-xs italic text-black/40">
+          Updated: {new Date().toISOString().split("T")[0]}
+        </p>
+      </div>
+    </div>
+  </div>
+</MainLayout>
