@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+  author?: string;
+  date?: string;
+  content: string[];
+  source?: string;
+  sourceUrl?: string;
+}
+
+const { title, author, date, content, source, sourceUrl } = Astro.props;
+---
+
+<div class="my-32 mx-auto max-w-4xl px-8">
+  <div class="space-y-8">
+    {/* Technical Header */}
+    <div class="font-mono text-xs text-black/40 space-y-1">
+      <div>CACHE_TYPE: MANIFESTO</div>
+      {date && <div>TIMESTAMP: {date}</div>}
+      {author && <div>AUTHOR: {author}</div>}
+      {
+        source && (
+          <div>
+            SOURCE:{" "}
+            {sourceUrl ? (
+              <a href={sourceUrl} class="underline hover:text-black/60">
+                {source}
+              </a>
+            ) : (
+              source
+            )}
+          </div>
+        )
+      }
+    </div>
+
+    {/* Manifesto Title */}
+    <h2 class="text-3xl font-bold border-b-2 border-black/10 pb-4">{title}</h2>
+
+    {/* Manifesto Content */}
+    <div class="space-y-6 font-mono leading-relaxed">
+      {content.map((paragraph) => <p class="text-lg">{paragraph}</p>)}
+    </div>
+
+    {/* Digital Rights Visualization - Optional stylistic element */}
+    <div class="grid grid-cols-8 gap-1 py-4">
+      {
+        Array.from({ length: 16 }).map((_, i) => (
+          <div
+            class={`h-1.5 rounded-full ${
+              i % 3 === 0 ? "bg-primary" : "bg-black/10"
+            }`}
+          />
+        ))
+      }
+    </div>
+
+    {/* Signature-like element if author is provided */}
+    {
+      author && (
+        <div class="italic text-right text-black/60 pt-8">— {author}</div>
+      )
+    }
+  </div>
+</div>
