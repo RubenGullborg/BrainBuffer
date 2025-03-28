@@ -22,17 +22,19 @@ export default function Nav() {
           strokeLinecap="round"
         />
       </svg>
-      
+
       <div>
-        <img
-          src={Avatar.src}
-          alt="Profile picture of me"
-          className="rounded-full max-h-14"
-        />
+        <a href="/">
+          <img
+            src={Avatar.src}
+            alt="Profile picture of me"
+            className="rounded-full max-h-14"
+          />
+        </a>
       </div>
 
       <h1 className="text-lg font-bold xl:pl-40">
-        <a href="/">BrainBuffer</a>
+        <a href="/">BrainBuffer.dll</a>
       </h1>
 
       {/* Desktop menu */}
@@ -48,21 +50,21 @@ export default function Nav() {
         className="space-y-1.5 cursor-pointer xl:hidden z-50 relative"
         animate={toggled ? "open" : "closed"}
       >
-        <motion.span 
+        <motion.span
           variants={{
             closed: { rotate: 0, y: 0 },
             open: { rotate: 45, y: 6 },
           }}
           className="block h-0.5 w-8 bg-black origin-center transition-all"
         />
-        <motion.span 
+        <motion.span
           variants={{
             closed: { opacity: 1 },
             open: { opacity: 0 },
           }}
           className="block h-0.5 w-6 bg-black transition-all"
         />
-        <motion.span 
+        <motion.span
           variants={{
             closed: { rotate: 0, y: 0 },
             open: { rotate: -45, y: -6 },
@@ -80,7 +82,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-white z-40"
           >
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -88,18 +90,18 @@ export default function Nav() {
               className="flex flex-col items-center justify-center h-full gap-8 text-2xl"
             >
               {[
-                { text: 'L1 - Letters', href: '/L1' },
-                { text: 'L2 - Images', href: '/L2' },
-                { text: 'L3 - Videos', href: '/L3' }
+                { text: "L1 - Letters", href: "/L1" },
+                { text: "L2 - Images", href: "/L2" },
+                { text: "L3 - Videos", href: "/L3" },
               ].map((item, i) => (
                 <motion.a
                   key={item.text}
                   href={item.href}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: 1, 
+                  animate={{
+                    opacity: 1,
                     y: 0,
-                    transition: { delay: 0.3 + i * 0.25 }
+                    transition: { delay: 0.3 + i * 0.25 },
                   }}
                   exit={{ opacity: 0, y: 20 }}
                   className="hover:text-gray-600 transition-colors relative group"

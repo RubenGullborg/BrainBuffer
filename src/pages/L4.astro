@@ -21,12 +21,7 @@ import MainLayout from "../layouts/main-layout.astro";
           id="neural-field"
           class="w-full h-[60vh] bg-black/5 rounded relative overflow-hidden min-h-screen/50"
         >
-          <!-- Neural particle field placeholder -->
-          <div class="absolute inset-0 flex items-center justify-center">
-            <p class="text-black/30 font-mono text-sm">
-              Interactive Neural Field Loading...
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
@@ -165,20 +160,19 @@ import MainLayout from "../layouts/main-layout.astro";
     }
   }
 
-  // Initialize on page load
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeNeuralField() {
     const container = document.getElementById("neural-field");
     if (container) {
+      // Nulstil containeren først for at undgå overlappende instances
+      container.innerHTML = '';
       new NeuralField(container);
     }
-  });
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", initializeNeuralField);
 
   // Also handle Astro page transitions if used
-  document.addEventListener("astro:page-load", () => {
-    const container = document.getElementById("neural-field");
-    if (container && !container.hasChildNodes()) {
-      new NeuralField(container);
-    }
-  });
+  document.addEventListener("astro:page-load", initializeNeuralField);
 </script>
 
