@@ -24,31 +24,89 @@ import Text from "../components/Text.astro";
     tags={["Stoicism"]}
   />
 
+  <Text title="Who's Aaron Swartz?" class="font-mono">
+    <p>
+      Swartz, 26, who helped develop the RSS standard, which helps people learn
+      all the stuff they want to without going to a bunch of different websites
+      , and was (kind of) a co-founder of Reddit.
+      <br /><br />
+      In 2008, Aaron Swartz downloaded 2.7 million public court documents from the
+      PACER [Public Access to Court Electronic Records] database, aiming to make
+      them freely accessible. PACER charged 0.08$ per-page despite the public domain
+      status, resulting in a budget surplus of some $150 million, reported the <a
+        href="https://www.nytimes.com/2009/02/13/us/13records.html"
+        class="underline">New York Times</a
+      >. <br />
+      <br /> In 1 of 17 libraries, conducting a free trial of the PACER system, Swartz
+      used the credentials of a Sacramento library and a Perl script to download
+      2.7 million court documents and later distribute them publically. <br />
+
+      His actions led to an FBI investigation, but no charges were filed, as it
+      was ultimately deemed that the documents were, in fact, public.
+      <br />
+      <br />
+      Between 2010 - 2011, through an unlocked wiring closet, Swartz used his Harvard
+      University JSTOR [Journal Storage] account, to access a database of academic
+      journals through MITs network and download approximately 4.8 million academic
+      articles from JSTOR,
+      <span class="italic"> "with the intent to distribute"</span> according to prosecutors.
+      <br />
+      <br />
+      Although JSTOR declined to pursue charges and reached a settlement with Swartz
+      in June 2011; under the terms that he surrendered the downloaded data, Swartz
+      was arrested on the night of January 6, 2011 near the Harvard campus. Federal
+      prosecutors, led by U.S. Attorney Carmen Ortiz, continued an aggressive case
+      against him. The prosecution brought 13 felony charges under the Computer Fraud
+      and Abuse Act, including wire fraud and computer fraud.
+      <br /><br />
+      The case became highly controversial as prosecutors sought an extraordinary
+      sentence: up to 35 years in prison and $1 million in fines if convicted. Many
+      legal experts criticized the prosecution as disproportionate and politically
+      motivated.
+      <br /><br />
+      On the evening of January 11, 2013, Swartz committed suicide in his Brooklyn
+      apartment, at age 26. Swartz's family and his partner created a memorial website
+      on which they issued the statement:
+      <br />
+      <br />
+      <span class="italic"
+        >"He used his prodigious skills as a programmer and technologist not to
+        enrich himself but to make the Internet and the world a fairer, better
+        place."
+      </span>
+      <br />
+      <br /> Below you can read the Guerilla Open Access Manifesto, written by Aaron
+      Swartz.
+      <br />
+      <br />
+    </p>
+  </Text>
+
   <Manifesto
     title="Guerilla Open Access Manifesto"
     content={[
-  "Information is power. But like all power, there are those who want to keep it for themselves. The world's entire scientific and cultural heritage, published over centuries in books and journals, is increasingly being digitized and locked up by a handful of private corporations. Want to read the papers featuring the most famous results of the sciences? You'll need to send enormous amounts to publishers like Reed Elsevier.",
-  
-  "There are those struggling to change this. The Open Access Movement has fought valiantly to ensure that scientists do not sign their copyrights away but instead ensure their work is published on the Internet, under terms that allow anyone to access it. But even under the best scenarios, their work will only apply to things published in the future. Everything up until now will have been lost.",
-  
-  "That is too high a price to pay. Forcing academics to pay money to read the work of their colleagues? Scanning entire libraries but only allowing the folks at Google to read them? Providing scientific articles to those at elite universities in the First World, but not to children in the Global South? It's outrageous and unacceptable.",
-  
-  "\"I agree,\" many say, \"but what can we do? The companies hold the copyrights, they make enormous amounts of money by charging for access, and it's perfectly legal — there's nothing we can do to stop them.\" But there is something we can, something that's already being done: we can fight back.",
-  
-  "Those with access to these resources — students, librarians, scientists — you have been given a privilege. You get to feed at this banquet of knowledge while the rest of the world is locked out. But you need not — indeed, morally, you cannot — keep this privilege for yourselves. You have a duty to share it with the world. And you have: trading passwords with colleagues, filling download requests for friends.",
+      "Information is power. But like all power, there are those who want to keep it for themselves. The world's entire scientific and cultural heritage, published over centuries in books and journals, is increasingly being digitized and locked up by a handful of private corporations. Want to read the papers featuring the most famous results of the sciences? You'll need to send enormous amounts to publishers like Reed Elsevier.",
 
-  "Meanwhile, those who have been locked out are not standing idly by. You have been sneaking through holes and climbing over fences, liberating the information locked up by the publishers and sharing them with your friends.",
+      "There are those struggling to change this. The Open Access Movement has fought valiantly to ensure that scientists do not sign their copyrights away but instead ensure their work is published on the Internet, under terms that allow anyone to access it. But even under the best scenarios, their work will only apply to things published in the future. Everything up until now will have been lost.",
 
-  "But all of this action goes on in the dark, hidden underground. It's called stealing or piracy, as if sharing a wealth of knowledge were the moral equivalent of plundering a ship and murdering its crew. But sharing isn't immoral — it's a moral imperative. Only those blinded by greed would refuse to let a friend make a copy. ",
-   
-   "Large corporations, of course, are blinded by greed. The laws under which they operate require it — their shareholders would revolt at anything less. And the politicians they have bought off back them, passing laws giving them the exclusive power to decide who can make copies. ",
-   
-   "There is no justice in following unjust laws. It's time to come into the light and, in the grand tradition of civil disobedience, declare our opposition to this private theft of public culture.",
-   
-   "We need to take information, wherever it is stored, make our copies and share them with the world. We need to take stuff that's out of copyright and add it to the archive. We need to buy secret databases and put them on the Web. We need to download scientific journals and upload them to file sharing networks. We need to fight for Guerilla Open Access. ",
-   
-   "With enough of us, around the world, we'll not just send a strong message opposing the privatization of knowledge — we'll make it a thing of the past. Will you join us? "
-   ]}
+      "That is too high a price to pay. Forcing academics to pay money to read the work of their colleagues? Scanning entire libraries but only allowing the folks at Google to read them? Providing scientific articles to those at elite universities in the First World, but not to children in the Global South? It's outrageous and unacceptable.",
+
+      '"I agree," many say, "but what can we do? The companies hold the copyrights, they make enormous amounts of money by charging for access, and it\'s perfectly legal — there\'s nothing we can do to stop them." But there is something we can, something that\'s already being done: we can fight back.',
+
+      "Those with access to these resources — students, librarians, scientists — you have been given a privilege. You get to feed at this banquet of knowledge while the rest of the world is locked out. But you need not — indeed, morally, you cannot — keep this privilege for yourselves. You have a duty to share it with the world. And you have: trading passwords with colleagues, filling download requests for friends.",
+
+      "Meanwhile, those who have been locked out are not standing idly by. You have been sneaking through holes and climbing over fences, liberating the information locked up by the publishers and sharing them with your friends.",
+
+      "But all of this action goes on in the dark, hidden underground. It's called stealing or piracy, as if sharing a wealth of knowledge were the moral equivalent of plundering a ship and murdering its crew. But sharing isn't immoral — it's a moral imperative. Only those blinded by greed would refuse to let a friend make a copy. ",
+
+      "Large corporations, of course, are blinded by greed. The laws under which they operate require it — their shareholders would revolt at anything less. And the politicians they have bought off back them, passing laws giving them the exclusive power to decide who can make copies. ",
+
+      "There is no justice in following unjust laws. It's time to come into the light and, in the grand tradition of civil disobedience, declare our opposition to this private theft of public culture.",
+
+      "We need to take information, wherever it is stored, make our copies and share them with the world. We need to take stuff that's out of copyright and add it to the archive. We need to buy secret databases and put them on the Web. We need to download scientific journals and upload them to file sharing networks. We need to fight for Guerilla Open Access. ",
+
+      "With enough of us, around the world, we'll not just send a strong message opposing the privatization of knowledge — we'll make it a thing of the past. Will you join us? ",
+    ]}
     author="Aaron Swartz"
     date="21-11-2011_23:47:54"
     source="archive.org/details/GuerillaOpenAccessManifesto"

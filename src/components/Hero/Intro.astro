@@ -1,26 +1,26 @@
 ---
 import { Image } from "astro:assets";
-import Akira from "../assets/akira.jpg";
+import Akira from "../../assets/akira.jpg";
 ---
 
 <div class="relative mx-12 flex flex-col items-center justify-center">
   <h1 class="text-5xl text-left">
-    Welcome to my <span class="font-bold">neural cache </span> architecture
+    Welcome to my <span class="font-bold">neural cache </span>
   </h1>
 
   <div class="relative my-16">
     <p class="p-4 text-lg text-left max-w-4xl">
       This is my <span class="font-bold text-primary"
         >Brainbuffer - L1 Neural Cache.
-      </span>
-      A place designed for my synaptic connections to meet modern digital architecture.
+      </span><br/><br/>
+      A place designed for my synaptic connections to meet modern day technology.
       Here i want to collect all the things that fuels the inspiration, motivation
       and imagination in my mind.
       <br /><br />
       I've formed this blog like a well-tuned cache memory, to stores and serve bits
       of inspiration in its purest form, be it letters, images, videos, or anything
       else. In other word this is my mind's L1 cache – the fastest, most immediate
-      access to the creative packets stored in my brain.
+      access to the creative packets of my brain.
       <br /><br />
       Scroll through an endless stream of media – each which has ignited a creative
       spark in me, and hopefully will do the same for you. <br /><br />Like a
@@ -33,11 +33,11 @@ import Akira from "../assets/akira.jpg";
         >L3
       </span>stores larger sequential data [videos]. <br /><br />Each memory
       block is cached here the moment it triggers a creative interrupt in on of
-      my many threads of thought.
+      my threads of thought.
       <br /><br />
-      No algorithms, no AI,no restrictions, just pure, unfiltered inspiration flowing from
+      No algorithms, no AI, no restrictions, just pure, unfiltered inspiration flowing from
       my mind to your screen. Dive deep and let your mind wander through this digital
-      constellation of these random access memories.
+      constellation of random access memories.
     </p>
   </div>
 
@@ -46,15 +46,15 @@ import Akira from "../assets/akira.jpg";
   >
     <div class="w-full sm:w-40">
       <h2 class="text-lg sm:text-xl">Clock Cycles</h2>
-      <p id="clockcycles-counter" class="text-2xl sm:text-3xl font-bold font-mono">24</p>
+      <p class="text-2xl sm:text-3xl font-bold font-mono">24</p>
     </div>
     <div class="w-full sm:w-40">
       <h2 class="text-lg sm:text-xl line-through">Stack limit</h2>
-      <p id="" class="text-2xl sm:text-3xl font-bold font-mono">Undefined</p>
+      <p class="text-2xl sm:text-3xl font-bold font-mono">Undefined</p>
     </div>
     <div class="w-full sm:w-40">
       <h2 class="text-lg sm:text-xl">Memory space</h2>
-      <p id="memoryspace-counter" class="text-2xl sm:text-3xl font-bold font-mono">25</p>
+      <p class="text-2xl sm:text-3xl font-bold font-mono">25</p>
     </div>
   </div>
 
@@ -63,27 +63,3 @@ import Akira from "../assets/akira.jpg";
   </div>
 </div>
 <div class="mt-12 h-6 w-full bg-black"></div>
-
-<script>
-  //Increment
-  function incrementCounter(
-    selector: string,
-    current: number,
-    target: number,
-    duration: number,
-    letter: string = ""
-  ) {
-    let counter = document.getElementById(selector);
-    let stepTime = Math.abs(Math.floor(duration / target));
-    if (current < target && counter) {
-      current++;
-      counter.innerText = current.toString() + letter;
-      setTimeout(
-        () => incrementCounter(selector, current, target, duration, letter),
-        stepTime
-      );
-    }
-  }
-  incrementCounter("clockcycles-counter", 0, 24, 1000, " hours");
-  incrementCounter("memoryspace-counter", 0, 25, 1000, " mil gb");
-</script>
