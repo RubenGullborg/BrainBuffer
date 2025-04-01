@@ -15,6 +15,8 @@ import Terminal from "../components/L1/Terminal.astro";
 import Text from "../components/Text.astro";
 ---
 
+
+
 <MainLayout title="L1 Cache">
   <Quote
     content="For freedom is acquired not by the full possession of the things which are desired, but by removing the desire..."
@@ -26,9 +28,9 @@ import Text from "../components/Text.astro";
 
   <Text title="Who's Aaron Swartz?" class="font-mono">
     <p>
-      Swartz, 26, who helped develop the RSS standard, which helps people learn
-      all the stuff they want to without going to a bunch of different websites
-      , and was (kind of) a co-founder of Reddit.
+      Swartz, 26, was a Harvard University student who helped develop the RSS
+      standard and (kind of) co-founded Reddit. He was also a hacker, activist
+      and internet freedom advocate, which i will talk a bit about below.
       <br /><br />
       In 2008, Aaron Swartz downloaded 2.7 million public court documents from the
       PACER [Public Access to Court Electronic Records] database, aiming to make
@@ -37,8 +39,8 @@ import Text from "../components/Text.astro";
         href="https://www.nytimes.com/2009/02/13/us/13records.html"
         class="underline">New York Times</a
       >. <br />
-      <br /> In 1 of 17 libraries, conducting a free trial of the PACER system, Swartz
-      used the credentials of a Sacramento library and a Perl script to download
+      <br /> In 1 of the 17 libraries, conducting a free trial of the PACER system,
+      Swartz used the credentials of a Sacramento library and a Perl script to download
       2.7 million court documents and later distribute them publically. <br />
 
       His actions led to an FBI investigation, but no charges were filed, as it
@@ -65,8 +67,8 @@ import Text from "../components/Text.astro";
       motivated.
       <br /><br />
       On the evening of January 11, 2013, Swartz committed suicide in his Brooklyn
-      apartment, at age 26. Swartz's family and his partner created a memorial website
-      on which they issued the statement:
+      apartment, at the age of 26. Swartz's family and his partner created a memorial
+      website on which they issued the statement:
       <br />
       <br />
       <span class="italic"
@@ -113,25 +115,50 @@ import Text from "../components/Text.astro";
     sourceUrl="https://archive.org/details/GuerillaOpenAccessManifesto"
   />
 
-  {
-    /* <KeyValue
+  <Text title="American Wealth Distribution: By the Numbers" class="font-mono">
+    <p>
+      The United States has one of the most uneven distributions of wealth and
+      income among developed nations. According to data from the Federal
+      Reserve, the top 10% of Americans hold approximately 69% of the nation's
+      wealth and the top 1% hold 38% of the nation's wealth, nearly as much
+      wealth as the collective bottom 90% of the nation.
+      <br />
+      <br />
+      Whats worse is that this disparity has grown substantially over recent decades.
+      When examining wage data specifically, the contrast becomes even more pronounced.
+      Social Security Administration figures reveal that while the average American
+      worker in the bottom 90% earns around $40,845 annually, while those in the top percentiles
+      earn many many multiples of this amount. The wage gap between the highest earners and
+      the average worker has expanded by roughly 350% since 1979. <br /> <br />
+      
+      This economic stratification affects
+      various aspects of American life, from housing access to educational opportunities.
+      Research from the Pew Research Center indicates that 67% of Americans believe
+      the wealth gap has increased in the past 20 years — a perception supported by
+      economic data. The Congressional Budget Office reports that between 1979 and
+      2019, real income for households in the top 1% grew by 160%, compared to a
+      26% increase for the middle 60% of the income distribution.
+    </p>
+  </Text>
+
+  <KeyValue
     title="WEALTH_DISTRIBUTION"
     items={[
       {
         key: "Top 0.1% of Americans",
-        value: 2817436,
+        value: "2.817.436",
         unit: "$ USD",
         description: "Average wages of top 0.1 percentile",
       },
       {
         key: "Top 1%",
-        value: 785968,
+        value: "785.968",
         unit: "$ USD",
         description: "Average wages of top 1 percentile",
       },
       {
         key: "Bottom 90%",
-        value: 40845,
+        value: "40.845",
         unit: "$ USD",
         description: "Average wages of bottom 90 percent",
       },
@@ -139,6 +166,4 @@ import Text from "../components/Text.astro";
     source="Economic Policy Institute analysis of Social Security Administration data"
     sourceUrl="https://www.bankrate.com/investing/income-wealth-top-1-percent/"
   />
-*/
-  }
 </MainLayout>
