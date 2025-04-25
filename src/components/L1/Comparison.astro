@@ -15,7 +15,7 @@ interface Props {
 const { titleA, titleB, items, conclusion } = Astro.props;
 ---
 
-<div class="my-32 mx-auto max-w-4xl px-8">
+<div class="my-32 mx-auto max-w-6xl px-8">
   <div class="font-mono space-y-6">
     <div class="text-xs text-black/40">NEURAL_COMPARISON_ANALYSIS</div>
 
@@ -34,7 +34,7 @@ const { titleA, titleB, items, conclusion } = Astro.props;
         {/* Comparison rows */}
         {
           items.map((item, i) => (
-            <div class={`grid grid-cols-3 ${i % 2 === 0 ? "bg-black/2" : ""}`}>
+            <div class={`grid grid-cols-3 ${i % 2 === 0 ? "bg-black/2" : ""} border-t border-black/5`}>
               <div class="p-3 border-r border-black/5">{item.aspect}</div>
               <div class="p-3 border-r border-black/5">{item.itemA}</div>
               <div class="p-3">{item.itemB}</div>
